@@ -1,7 +1,15 @@
 <template lang="">
   <div class="sibling" style="display: flex">
     <div class="title">
-      <span>Có {{obj.Siblings && obj.Siblings.length > 0 ? `${obj.Siblings.length}` : ''}} anh/chị/em </span>
+      <span
+        >Có
+        {{
+          obj.Siblings && obj.Siblings.length > 0
+            ? `${obj.Siblings.length}`
+            : "0"
+        }}
+        anh/chị/em
+      </span>
 
       <el-button
         @click="form.ShowForm('Thêm anh/chị/em', {}, true)"
@@ -16,7 +24,8 @@
       <div v-for="item in obj.Siblings">
         <el-row class="sib_infor">
           <el-col :span="3">
-            <el-avatar size="small" icon="el-icon-user-solid"></el-avatar>
+            <el-avatar size="small" v-if="!item.Avatar" icon="el-icon-user-solid"></el-avatar>
+            <el-avatar size="small" v-else :src="'/Images/avatar/' + item.Avatar.split('|')[0]" fit="fill"></el-avatar>
           </el-col>
           <el-col :span="6">
             {{ item.Name }}
@@ -41,16 +50,23 @@
             >
           </el-col>
 
-          <el-col :span="5"> </el-col>
-          <el-col :span="2">
+          <el-col :span="4"> </el-col>
+          <el-col :span="3">
             <el-button
               @click="
                 form.ShowForm(`Sửa thông tin của ${item.Name}`, item, false)
               "
               type="warning"
-              style="padding: 5px 5px"
+              style="padding: 4px"
             >
               <i class="fa fa-edit" aria-hidden="true"></i>
+            </el-button>
+            <el-button
+              type="danger"
+              @click="form.Delete(item)"
+              style="padding: 4px; margin-left: 2px"
+            >
+              <i class="fa fa-times"></i>
             </el-button>
           </el-col>
         </el-row>
@@ -70,7 +86,7 @@ import DefaultForm from "~/assets/scripts/base/DefaultForm";
 import GetDataAPI from "~/assets/scripts/GetDataAPI";
 import APIHelper from "~/assets/scripts/API/APIHelper";
 import Para from "~/assets/scripts/Para";
-import { MessageType, ShowMessage } from "~/assets/scripts/Functions";
+import { MessageType, ShowConfirm, ShowMessage } from "~/assets/scripts/Functions";
 import { EventBus } from "~/assets/scripts/EventBus.js";
 export default {
   props: {
@@ -121,8 +137,8 @@ export default {
                 .getEntry("avatarUrl")
                 .submitUpload()
                 .then((res) => {
-                    console.log(res)
-                    this.form.obj.Avatar = res.join(",");
+                  console.log(res);
+                  this.form.obj.Avatar = res.join(",");
                   GetDataAPI({
                     method: "post",
                     url: API.Add_ACE,
@@ -147,6 +163,28 @@ export default {
           // vEventBus.$emit("reloadFormFam", this.obj.Curent.Id);
 
           // }
+        },
+        Delete: (obj) => {
+          ShowConfirm({
+            message: "Xóa thông tin của <b>" + obj.Name + "</b>",
+            title: "Cảnh báo",
+            type: MessageType.warning,
+          })
+            .then(() => {
+              GetDataAPI({
+                method: "delete",
+                url: API.Giapha + "/" + obj.Id,
+                // params: Ơ,
+                action: function (re) {
+                  ShowMessage("Xóa thành công");
+                  this.form.visible = false;
+                  EventBus.$emit("reloadFormFam", this.obj.Curent.Id);
+                },
+              });
+            })
+            .catch((err) => {
+              // An error occurred
+            });
         },
       }),
     };

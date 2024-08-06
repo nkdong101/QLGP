@@ -136,8 +136,10 @@ export default {
         enableSearch: this.model.enableSearch,
         mouseScrool: FamilyTree.action.scroll,
         nodeMouseClick: FamilyTree.action.zoom,
-        // scaleInitial: FamilyTree.match.boundary,
-
+        // scaleInitial: FamilyTree.match.height,
+  //       keyNavigation: true,
+  //  keyNavigation: { focusId:this.user },
+        // siblingSeparation : 50,
         nodeMenu: {
           //   details: { text: "Details" },
           edit: {

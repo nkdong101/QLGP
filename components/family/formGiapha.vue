@@ -1,7 +1,8 @@
 <template lang="">
   <div class="fm_form">
     <div>{{hus? 'Cha' : 'Mẹ'}}</div>
-    <FormInfo ref="formFam" :model="obj.form2()" />
+    <FormInfo :ref="'formFam' + (hus ? 'C' : 'M')" :model="obj.form2()" />
+
   </div>
 </template>
 <script>

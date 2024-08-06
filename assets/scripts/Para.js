@@ -17,7 +17,7 @@ export var Para = {
   State: new SelectOption({
     data: [
       { Id: 1, Name: "Đang sống" },
-      { Id: 2, Name: "Đã chết" },
+      { Id: 2, Name: "Đã mất" },
       { Id: 3, Name: "Hiện không có thông tin" },
 
     ]

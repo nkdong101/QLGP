@@ -25,8 +25,8 @@
 
     <DefaultForm :model="form" @actionOK="form.Save.call(this)">
       <div class="formCM" style="display: flex" slot="content">
-        <formGiapha :hus="true" :obj="form.objC" />
-        <formGiapha :hus="false" :obj="form.objM" />
+        <formGiapha ref="formC" :hus="true" :obj="form.objC" />
+        <formGiapha ref="formM" :hus="false" :obj="form.objM" />
       </div>
     </DefaultForm>
   </div>
@@ -89,25 +89,89 @@ export default {
             this.form.objC.Dongho_id = this.user.Dongho_id;
             this.form.objM.Dongho_id = this.user.Dongho_id;
           }
-          GetDataAPI({
-            url: API.Save_Bome,
-            params: {
-              Con_Info: new Giapha(this.obj.Curent).toJSON(),
-              Bo_Info: this.form.objC.toJSON(),
-              Me_Info: this.form.objM.toJSON(),
-            },
-            method: "post",
-            action: (re) => {
-              ShowMessage(
-                this.isAdd ? "Thêm thành công" : "Sửa thành công",
-                "success"
-              );
-              this.form.visible = false;
-              // this.reLoad();
-              EventBus.$emit("reloadFormFam", this.obj.Curent.Id);
-            },
+
+          console.log(this);
+          // return;
+          this.$refs.formC.$refs.formFamC.getValidate().then((re) => {
+            if (!re) {
+              ShowMessage("Vui lòng nhập đầy đủ thông tin", MessageType.error);
+              return;
+            } else {
+              this.$refs.formM.$refs.formFamM.getValidate().then((re) => {
+                if (!re) {
+                  ShowMessage(
+                    "Vui lòng nhập đầy đủ thông tin",
+                    MessageType.error
+                  );
+                  return;
+                } else {
+                  this.$refs.formC.$refs.formFamC
+                    .getEntry("avatarUrl")
+                    .submitUpload()
+                    .then((res) => {
+                      this.form.objC.Avatar = res.join(",");
+                      this.$refs.formM.$refs.formFamM
+                        .getEntry("avatarUrl")
+                        .submitUpload()
+                        .then((re) => {
+                          this.form.objM.Avatar = re.join(",");
+
+                          GetDataAPI({
+                            url: API.Save_Bome,
+                            params: {
+                              Con_Info: new Giapha(this.obj.Curent).toJSON(),
+                              Bo_Info: this.form.objC.toJSON(),
+                              Me_Info: this.form.objM.toJSON(),
+                            },
+                            method: "post",
+                            action: (re) => {
+                              ShowMessage(
+                                this.isAdd
+                                  ? "Thêm thành công"
+                                  : "Sửa thành công",
+                                "success"
+                              );
+                              this.form.visible = false;
+                              // this.reLoad();
+                              EventBus.$emit(
+                                "reloadFormFam",
+                                this.obj.Curent.Id
+                              );
+                            },
+                          });
+                        });
+                    });
+                }
+              });
+
+              // this.$refs.formC
+              //   .getEntry("avatarUrl")
+              //   .submitUpload()
+              //   .then((res) => {
+              //     console.log(res);
+
+              //     this.form.obj.Avatar = res.join(",");
+              //     GetDataAPI({
+              //       method: "post",
+              //       url: API.Save_Bome,
+              //       params: {
+              //         Con_Info: new Giapha(this.obj.Curent).toJSON(),
+              //         Bo_Info: this.form.objC.toJSON(),
+              //         Me_Info: this.form.objM.toJSON(),
+              //       },
+              //       action: (re) => {
+              //         ShowMessage(
+              //           this.isAdd ? "Thêm thành công" : "Sửa thành công",
+              //           "success"
+              //         );
+              //         this.form.visible = false;
+              //         // this.reLoad();
+              //         EventBus.$emit("reloadFormFam", this.obj.Curent.Id);
+              //       },
+              //     });
+              //   });
+            }
           });
-          // }
         },
       }),
     };

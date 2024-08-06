@@ -201,7 +201,7 @@ export default class Giapha {
                 format: 'dd/MM'
             },
             watch(data, n, o, t, isFirst) {
-                if (!isFirst) {
+            //   if(!isFirst) {
                     if (data.Date_of_death) {
                         let ngaysinh = new Date(data.Date_of_death)
 
@@ -210,10 +210,10 @@ export default class Giapha {
                             data.year_die = ngaysinh.getFullYear()
                         }
                     }
+// 
+                // }
 
-
-
-                }
+                
             },
             options(data) {
                 return new DatePickerOption({
@@ -222,7 +222,27 @@ export default class Giapha {
             },
         }),
 
+        death_year : new FormElement({
+            label: '',
+            model: 'year_die',
+            // type: FormElementType.datePicker,
+            attr: {
+                placeholder: 'Năm'
+            },
+            col: 5,
 
+            events: {
+                blur(data, t) {
+                    if (t) {
+                        if (data.Date_of_death) {
+                            let date = new Date(data.Date_of_death);
+                            data.Date_of_death = new Date(data.year_die, date.getMonth(), date.getDate()).toJSON()
+                        }
+
+                    }
+                }
+            }
+        }),
 
 
 
@@ -372,27 +392,8 @@ export default class Giapha {
                             type: 'label',
                             child: [
                                 this._formElements.Date_of_death.set(p => p.col = 10),
-                                new FormElement({
-                                    label: '',
-                                    model: 'year_die',
-                                    // type: FormElementType.datePicker,
-                                    attr: {
-                                        placeholder: 'Năm'
-                                    },
-                                    col: 5,
-
-                                    events: {
-                                        blur(data, t) {
-                                            if (t) {
-                                                if (data.Date_of_death) {
-                                                    let date = new Date(data.Date_of_death);
-                                                    data.Date_of_death = new Date(data.year_die, date.getMonth(), date.getDate()).toJSON()
-                                                }
-
-                                            }
-                                        }
-                                    }
-                                }),
+                                this._formElements.death_year
+                                
                             ]
                         }),
 

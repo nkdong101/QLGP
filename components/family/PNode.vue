@@ -17,27 +17,50 @@
         <!-- <i class="fa fa-check-circle"></i> -->
       </div>
       <div class="bottom">
-        <div class="img"><el-avatar icon="el-icon-user-solid"></el-avatar></div>
+        <div class="img">
+          <el-avatar v-if="!person.Avatar" icon="el-icon-user-solid"></el-avatar>
+          <el-avatar v-else :src="'/Images/avatar/' + person.Avatar.split('|')[0]" fit="fill"></el-avatar>
+        
+        
+        </div>
         <div class="infor">
-          <el-row :gutter="10">
-            <el-col :span="24"
+          <el-row type="flex" align="middle" :gutter="10">
+            <el-col :span="18"
               ><i class="fa fa-user-circle" aria-hidden="true"></i>
               {{ person.Name }}
               {{ person.Other_Name ? `(${person.Other_Name})` : "" }}
             </el-col>
+            <el-col :span="6"
+              >
 
+              <el-tooltip class="item"  :content="'Thêm ' + (person.Gender == 1 ? 'vợ' : 'chồng')" placement="top-start">
+  
+
+                <el-button
+          type="primary"
+          v-if="nameTitle === ''"
+          @click="AddVo()"
+         style="color: white;padding: 7px;  "
+        >
+          <i style="color: white; margin: 0;   font-size: 12px;" :class="person.Gender == 2? 'fa fa-male' : 'fa fa-female'"></i>
+        </el-button>
+    </el-tooltip>
+
+
+             
+            </el-col>
             <!-- <el-col :span="8">Số điện thoại: {{ person.Phone }}</el-col> -->
           </el-row>
           <el-row :gutter="10">
             <el-col :span="24"
               >
-              <span v-if="person.Birthday ">
+              <span v-if="person.Birthday && !person.Date_of_death">
               <i class="fa fa-birthday-cake" aria-hidden="true"></i>
               {{
                 person.Birthday
                   ? ConvertStr.ToDateStr(person.Birthday)
                   : person.Year_Of_Birth
-              }}</span> &nbsp;
+              }}</span> 
               <span v-if="person.Date_of_death">
                 <i class="fa fa-chain-broken" aria-hidden="true"></i>
               {{
@@ -139,35 +162,41 @@ export default {
       // console.log('node click')
       this.$emit("showForm", `Thêm  Cha/Mẹ`, {}, 1, "", true);
     },
+    AddVo(title){
+      // console.log("AddVo")
+      this.$emit("AddVo",this.person.Gender == 2 ? "Thêm chồng thứ" : "Thêm vợ thứ")
+    }
   },
   mounted() {
-    switch (this.type) {
-      case 1: // bố/mẹ
-        // if (this.Pid) {
-        //   GetDataAPI({
-        //     url: API.Giapha + "/" + this.Pid,
-        //     action: (re) => {
-        //       this.person = re;
-        //       // this.form.visible = true;
-        //     },
-        //   });
-        // }
-        this.person = this.obj;
-        break;
-      case 2: //chủ thể
-        this.person = this.obj;
-        break;
-      case 3: //vợ/Chồng
-        // this.person = this.obj;
-        GetDataAPI({
-          url: API.Giapha + "/" + this.Pid,
-          action: (re) => {
-            this.person = re;
-            // this.form.visible = true;
-          },
-        });
-        break;
-    }
+    this.person = this.obj;
+    // switch (this.type) {
+    //   case 1: // bố/mẹ
+    //     // if (this.Pid) {
+    //     //   GetDataAPI({
+    //     //     url: API.Giapha + "/" + this.Pid,
+    //     //     action: (re) => {
+    //     //       this.person = re;
+    //     //       // this.form.visible = true;
+    //     //     },
+    //     //   });
+    //     // }
+    //     this.person = this.obj;
+    //     break;
+    //   case 2: //chủ thể
+    //     this.person = this.obj;
+    //     break;
+    //   case 3: //vợ/Chồng
+    //     // this.person = this.obj;
+    //     // GetDataAPI({
+    //     //   url: API.Giapha + "/" + this.Pid,
+    //     //   action: (re) => {
+    //     //     this.person = re;
+    //     //     // this.form.visible = true;
+    //     //   },
+    //     // });
+       
+    //     break;
+    // }
     // console.log("mounted", this.Pid);
     // if (this.Pid && this.type !== 2) {
     // }

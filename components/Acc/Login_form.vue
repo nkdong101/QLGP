@@ -56,7 +56,7 @@
 
         <div class="button-action">
           <div>
-            <el-button type="primary" size="medium" @click="Login()"
+            <el-button type="primary" size="medium" :loading="loading" @click="Login()"
               >Đăng nhập</el-button
             >
             <el-button type="primary" size="medium"
@@ -88,6 +88,7 @@ export default {
   },
   data() {
     return {
+    loading: false,
       iUserName: "",
       iUserNameError: "",
       iPassword: "",
@@ -157,6 +158,7 @@ export default {
     },
     Login() {
       var _app = this;
+      this.loading = true;
       this.Validate()
         .then((isValidate) => {
           GetDataAPI({
@@ -190,6 +192,7 @@ export default {
         })
         .catch((e) => {
           console.log(e);
+          this.loading = false;
         });
     },
     toRegiter(){
