@@ -191,7 +191,7 @@ export default class Giapha {
             model: 'State',
             type: 'select',
             options: Para.State,
-            col: 18,
+            // col: 18,
         }),
         Date_of_death: new FormElement({
             label: 'Ngày mất',

@@ -7,8 +7,8 @@ export default function (context) {
     : navigator.userAgent
 
   // console.log('auth mdw')
-  if (!localStorage.access_token && context.route.path != '/Account/Login') {
-    context.redirect('/Account/Login');
+  if (!localStorage.access_token && context.route.path != '/Account/Home') {
+    context.redirect('/Account/Home');
   } 
   else {
     return $auth.init(localStorage.user);

@@ -6,20 +6,7 @@
       cursor: isPanning ? 'move' : 'auto',
     }"
   >
-    <!-- <InputContainer style="width: 200px" label="Dòng họ" :labelWidth="100">
-      <InputSelect
-        @input="ChangeInpt"
-        v-model="dongho_id"
-        :model="Para.dong_ho"
-      />
-    </InputContainer> -->
-
-    <!-- <FamilyTree
-      @nodeEventClicked="handleClickNode"
-      ref="FamilyTree"
-      :nodes="nodes"
-      :model="model"
-    /> -->
+ 
     <div
       ref="svgContainer"
       class="svgContainer"
@@ -75,10 +62,9 @@
           v-for="(item, index) in nodes.Data"
           :key="item.id"
           :data="item"
-          :ref="'node' + item.id"
           :config="nodes.Config"
           :transform="`translate(${item.Box.X}, ${item.Box.Y})`"
-
+          @dotClick="dotClick"
           @nameClick="nameClick"
         />
       </svg>
@@ -90,19 +76,49 @@
         popper-class="btn-poper"
         ref="pop"
         width="100"
-        trigger="manual"     
+        trigger="manual"
       >
-
-      <div >
-        <el-button>aaa</el-button>
-      </div>
-        <el-button style="opacity: 1;padding:0" slot="reference"></el-button>
+        <div>
+          <el-button>aaa</el-button>
+        </div>
+        <el-button style="opacity: 1; padding: 0" slot="reference"></el-button>
       </el-popover>
     </div>
 
     <DefaultForm :model="form" @actionOK="form.Save.call(this)">
-      <div class="fm" slot="content">
-        <FormInfo ref="form" :model="form.obj.form()" />
+      <div class="fm" :style="{ display: !isAdd ? 'flex' : '' }" slot="content">
+        <FormInfo
+          :style="{ width: !isAdd ? '30%' : '100%' }"
+          ref="form"
+          :model="isAdd ? form.obj.form() : form.obj.form2()"
+        />
+        <div class="tieusu" v-if="!isAdd">
+          <p class="title">Tiểu sử</p>
+          <div class="ts-content">
+            <div v-for="(item, i) in tsArr" :key="i">
+              <p>- {{item}}</p>
+            </div>
+          </div>
+          <div ref="ts_ip">
+            <!-- <el-input
+              type="textarea"
+              :autosize="{ minRows:2}"
+              placeholder="Thêm tiểu sử"
+              v-model="tieusu"
+              @input="showSaveTS"
+            >
+            </el-input>
+            <el-button  @click="addTS" type="primary" v-if="isAddTs"
+              >Save</el-button
+            > -->
+            <QEditor
+          ref="entry"
+          v-model.lazy="tieusu"
+          class="quill-container"
+        />
+          </div> 
+         
+        </div>
       </div>
     </DefaultForm>
   </div>
@@ -112,6 +128,7 @@
 import Giapha from "~/assets/scripts/objects/Giapha";
 import DefaultForm from "~/assets/scripts/base/DefaultForm";
 import API from "~/assets/scripts/API";
+
 import {
   ShowMessage,
   ShowConfirm,
@@ -119,8 +136,9 @@ import {
 } from "~/assets/scripts/Functions";
 import GetDataAPI from "~/assets/scripts/GetDataAPI";
 import { EventBus } from "~/assets/scripts/EventBus.js";
-
+import APIHelper from "~/assets/scripts/API/APIHelper";
 export default {
+
   computed: {
     svgStyle() {
       return {
@@ -132,7 +150,10 @@ export default {
   },
   data() {
     return {
-      lastClickPosition: { x: 0, y: 0 },
+      tieusu: "",
+      isAddTs: false,
+      isAdd: null,
+      tsArr: [],
       nodeClicked: null,
       isPanning: null,
       viewBox: "561 -7 648 729",
@@ -168,29 +189,55 @@ export default {
           //     return;
           //   }
           // }
-          GetDataAPI({
-            url: API.GetFamily,
-            params: {
-              iPerson_id: obj.id,
-            },
-            action: (re) => {
-              this.form.obj = new Giapha({
-                ...re,
-              });
+          // console.log(quill)
+          if (isAdd) {
+            GetDataAPI({
+              url: API.GetFamily,
+              params: {
+                iPerson_id: obj.id,
+              },
+              action: (re) => {
+                this.form.obj = new Giapha({
+                  ...re,
+                });
+                this.form.visible = true;
+              },
+            });
+          } else {
+            APIHelper.Giapha.getInfor(obj.id).then((re) => {
+              //   console.log(re);
+              this.form.obj = new Giapha({ ...re });
+              this.form.noSave = false;
               this.form.visible = true;
-            },
-          });
+            });
+          }
         },
         Save: () => {
-          console.log("save", this.family);
+          console.log("save", this.tieusu);
         },
       }),
     };
   },
   methods: {
-   
-    nameClick(obj){
-      this.form.ShowForm('Thông tin',obj,true);
+    addTS() {
+      this.tsArr.push(this.tieusu);
+      this.tieusu = "";
+      this.isAddTs = false;
+    },
+    showSaveTS() {
+      if (this.tieusu) {
+        this.isAddTs = true;
+        console.log(this);
+        this.$nextTick(() => {
+          this.$refs.ts_ip.scrollIntoView({ behavior: "smooth", block: "end" });
+        });
+      }
+      if (!this.tieusu) {
+        this.isAddTs = false;
+      }
+    },
+    nameClick(obj) {
+      this.form.ShowForm("Thông tin", obj, true);
     },
 
     startPan(event) {
@@ -279,10 +326,9 @@ export default {
       // console.log(e);
       // this.$refs.pop.doDestroy();
       if (e.ctrlKey) {
-        
-        e.preventDefault(); 
+        e.preventDefault();
         const svgElement = this.$refs.svgElement;
-       
+
         const { left, top, width, height } = svgElement.getBoundingClientRect();
         const mouseX = e.clientX - left;
         const mouseY = e.clientY - top;
@@ -308,57 +354,36 @@ export default {
         //     // this.showPopover(rect.top + window.scrollY, rect.left + window.scrollX);
         //   }
         // this.$refs.pop.doDestroy();
-        this.updatePopoverPosition();
+        // this.updatePopoverPosition();
       }
     },
-    updatePopoverPosition() {
-      const { x, y } = this.lastClickPosition;
-      // Convert coordinates to viewBox-relative coordinates
-      const [viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight] = this.viewBox
-        .split(" ")
-        .map(Number);
-      const svgWidth = this.$refs.svgElement.getBoundingClientRect().width;
-      const svgHeight = this.$refs.svgElement.getBoundingClientRect().height;
+    // updatePopoverPosition() {
+    //   const { x, y } = this.lastClickPosition;
+    //   // Convert coordinates to viewBox-relative coordinates
+    //   const [viewBoxX, viewBoxY, viewBoxWidth, viewBoxHeight] = this.viewBox
+    //     .split(" ")
+    //     .map(Number);
+    //   const svgWidth = this.$refs.svgElement.getBoundingClientRect().width;
+    //   const svgHeight = this.$refs.svgElement.getBoundingClientRect().height;
 
-      const scaleX = svgWidth / viewBoxWidth;
-      const scaleY = svgHeight / viewBoxHeight;
+    //   const scaleX = svgWidth / viewBoxWidth;
+    //   const scaleY = svgHeight / viewBoxHeight;
 
-      const relativeX = (x - viewBoxX) * scaleX;
-      const relativeY = (y - viewBoxY) * scaleY;
+    //   const relativeX = (x - viewBoxX) * scaleX;
+    //   const relativeY = (y - viewBoxY) * scaleY;
 
-      this.nodePoperStyles = {
-        position: "absolute",
-        top: `${relativeY}px`,
-        left: `${relativeX}px`,
-        transform: "none", // Ensure no additional transform interferes
-      };
-    },
-
-    // dotClick(item) {
-    //   this.nodeClicked = item;
-    //   if(this.$refs.pop.showPopper){
-    //     this.$refs.pop.doClose();
-    //   }
-    //   this.$nextTick(() => {
-    //     const node = item.$el; // Adjusted for Vue v-for array ref
-    //     if (node) {
-    //       const rect = node.getBoundingClientRect();
-    //       this.lastClickPosition = {
-    //         x: rect.left + window.scrollX,
-    //         y: rect.top + window.scrollY,
-    //       };
-    //       // this.updatePopoverPosition();
-    //       this.nodePoperStyles = {
-
-    //         top: `${rect.y}px`,
-    //         left: `${rect.x}px`,
-    //         transform: "none", // Ensure no additional transform interferes
-    //       };
-    //       console.log(this.$refs.pop)
-    //       this.$refs.pop.doToggle();
-    //     }
-    //   });
+    //   this.nodePoperStyles = {
+    //     position: "absolute",
+    //     top: `${relativeY}px`,
+    //     left: `${relativeX}px`,
+    //     transform: "none", // Ensure no additional transform interferes
+    //   };
     // },
+
+    dotClick(item) {
+      console.log("click", item);
+      this.form.ShowForm(`Thông tim của ${item.name}`, item, false);
+    },
     nodeClick() {
       console.log("click");
     },
@@ -389,7 +414,7 @@ export default {
 <style lang="scss" scoped>
 .fm {
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
   .form-info {
     height: 100%;
     /deep/ .form-info-c {
@@ -401,7 +426,7 @@ export default {
         // height:100%;
         // background:red;
         // div:nth-child(2){
-        height: 100%;
+        // height: 100%;
         overflow: hidden;
         // }
         #div_siblings_form {
@@ -411,8 +436,36 @@ export default {
       }
     }
   }
+  .tieusu {
+    border: 1px solid rgb(203, 203, 203);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    margin-left: 10px;
+    position: relative;
+    overflow: auto;
+    .title {
+      //  position: absolute;
+      //  top: 0;
+      //  left: 0;
+      font-weight: bolder;
+      //  transform: translate(50%, 50%);
+      //  z-index: 1000;
+      height: auto;
+      //  width:100%;
+      padding: 5px 10px;
+      // background-color: white;
+    }
+    .ts-content {
+      padding: 10px 0;
+      div {
+        padding-bottom: 10px;
+      }
+    }
+  }
 }
-.fm /deep/ .form-info .form-info-c .el-row {
+.fm /deep/ .form-info .form-info-c > .el-row {
   justify-content: center;
 }
 

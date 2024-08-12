@@ -34,6 +34,21 @@
       stroke-width="5"
       :stroke="getFillColor(data.gioitinh)"
     ></line>
+    <text
+      data-text-overflow="multiline"
+
+      :style="{fontSize: '12px',userSelect: 'none',fontWieght:'bold' }"
+      fill="white"
+      x="110"
+      y="15"
+   font-size="30"
+   font-weight="700"
+      >
+        Đời {{ ConvertStr.convertToRoman(data.Level+1) }}
+      </text
+    >
+
+
     <foreignObject
       cursor="pointer"
       @click="$emit('nameClick', data)"
@@ -41,11 +56,11 @@
         fontSize: '14px',
       }"
       x="100"
-      y="45"
+      y="40"
       width="140"
       height="30"
       ><div class="text-container" xmlns="http://www.w3.org/1999/xhtml">
-        {{ data.name }}
+        {{ data.name }} 
        
       </div>
     </foreignObject>
@@ -53,14 +68,15 @@
     <text
       data-width="160"
       data-text-overflow="multiline"
-      style="font-size: 12px"
+
+      :style="{fontSize: '12px',userSelect: 'none' }"
       fill="black"
       x="100"
-      y="95"
+      y="83"
       text-anchor="start"
-      ><tspan x="100" y="90" text-anchor="start"
-        >{{ data.Namsinh }}
-        {{ data.Nammat ? " - " + data.Nammat : "" }}
+      ><tspan x="100" y="83" text-anchor="start"
+        >{{ data.Namsinh == 0 ? 'Không rõ': data.Namsinh }}
+        {{ data.Nammat ? " - "  + data.Nammat : "" }}
       </tspan></text
     >
     <use xlink:href="#base_img_0_stroke" />
@@ -99,6 +115,7 @@
   </g>
 </template>
 <script>
+// import Functions from '~/assets/scripts/Functions'
 export default {
   props: {
     data: {},
@@ -113,7 +130,7 @@ export default {
       // console.log("handClickdotdotdotdot");
       // console.log(this.$refs['pop'+this.data.id])
       // this.$refs["pop" + this.data.id].doToggle();
-      // this.$emit('dotClick',this);
+      this.$emit('dotClick',this.data);
     },
     getFillColor(gioitinh) {
       return gioitinh === 1 ? "#6bb4df" : "#cb4aaf";
@@ -133,7 +150,8 @@ export default {
   display: inline-block;
   width: 100%;
   height: 100%;
-  vertical-align: sub;
+  // vertical-align: sub;
   word-break: break-word;
+  user-select:none;
 }
 </style>

@@ -116,7 +116,7 @@ export default {
     logout() {
       localStorage.clear();
 
-          this.$router.push("/Account/login");
+          this.$router.push("/Account/Home");
     
     },
   },

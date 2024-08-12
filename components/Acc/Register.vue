@@ -1,12 +1,14 @@
 <template lang="">
   <div class="regis">
-    <div class="title" style="font-weight: bold; font-size: 18px">
-      <p>Đăng ký</p>
-    </div>
     <div style="display: flex; align-items: baseline">
       <div class="left-side">
-        <p class="title" style="margin: 20px 0">Thông tin đăng nhập</p>
+       <!-- <p class="title" style="margin: 20px 0">Thông tin đăng nhập</p>
+
+        -->
+       
+
         <el-form
+
           :model="objUSer"
           :rules="rules"
           ref="objUSer"
@@ -19,18 +21,18 @@
           <el-form-item label="Mật khẩu" prop="Password" required>
             <el-input type="password" v-model="objUSer.Password"></el-input>
           </el-form-item>
-          <el-form-item label="Tên đầy đủ" prop="FullName" required>
+          <el-form-item label="Tên liên hệ" prop="FullName" required>
             <el-input v-model="objUSer.FullName"></el-input>
           </el-form-item>
-          <el-form-item label="Địa chỉ" prop="Address">
+          <!-- <el-form-item label="Địa chỉ" prop="Address">
             <el-input v-model="objUSer.Address"></el-input>
-          </el-form-item>
-          <el-form-item label="Email" prop="Email">
+          </el-form-item> -->
+          <!-- <el-form-item label="Email" prop="Email">
             <el-input v-model="objUSer.Email"></el-input>
           </el-form-item>
           <el-form-item label="Số định danh" prop="CMND">
             <el-input v-model="objUSer.CMND"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="Ngày sinh" prop="BirthDay">
             <el-date-picker
               format="dd/MM/yyyy"
@@ -57,17 +59,17 @@
             <el-button @click="resetForm('objUSer')">Reset</el-button>
           </el-form-item> -->
         </el-form>
-        <div
+        <!-- <div
           @click="$emit('regiter', false)"
           style="cursor: pointer; width: fit-content"
         >
           <i style="font-size: 10px; text-decoration: underline"
             >Đã có tài khoản?</i
           >
-        </div>
+        </div> -->
       </div>
       <div class="right-side">
-        <p class="title" style="margin: 20px 0">Thông tin dòng họ</p>
+        <!-- <p class="title" style="margin: 20px 0">Thông tin dòng họ</p> -->
         <el-form
           :model="Dongho_Info"
           :rules="rules_Dongho_Info"
@@ -106,22 +108,18 @@
               v-model="Dongho_Info.Description"
             ></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-button
-              type="primary"
-              @click="submitForm('objUSer', 'Dongho_Info')"
-              >Đăng ký</el-button
-            >
-            <!-- <el-button @click="resetForm('objUSer')">Reset</el-button> -->
-          </el-form-item>
+          <!-- <el-form-item>
+          
+          
+          </el-form-item> -->
         </el-form>
       </div>
     </div>
-    <!-- <div class="footer">
-        <el-button type="primary" @click=""
-              >Đăng ký</el-button
-            >
-      </div> -->
+    <div style="text-align:center;padding:20px 0 0 0;" >
+      <el-button type="primary" style="padding: 8px 30%;font-size:16px;" @click="submitForm('objUSer', 'Dongho_Info')"
+        >Khởi tạo</el-button
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -201,26 +199,24 @@ export default {
   },
   methods: {
     selectTinh(value) {
-
       console.log(this);
-      if(value){
+      if (value) {
         this.$nextTick(() => {
-        console.log(
-          "this.$refs.tinh.selectedData",
-          this.$refs.tinh.selectedData
-        );
-        // this.tinhSeleceted = this.$refs.tinh.selectedData
-        this.list_huyen = new SelectOption({
-          data: this.$refs.tinh.selectedData.Childs,
+          console.log(
+            "this.$refs.tinh.selectedData",
+            this.$refs.tinh.selectedData
+          );
+          // this.tinhSeleceted = this.$refs.tinh.selectedData
+          this.list_huyen = new SelectOption({
+            data: this.$refs.tinh.selectedData.Childs,
+          });
         });
-      });
-      }else{
+      } else {
         this.list_huyen = new SelectOption({
           data: [],
         });
-        this.Dongho_Info.Huyen_id = '';
+        this.Dongho_Info.Huyen_id = "";
       }
-     
 
       // this.list_huyen.data
     },
@@ -263,10 +259,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .regis {
-  background: #fff;
+  // background: #fff;
+  // border-radius: 20px;
+
+  // box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  padding: 40px 30px;
   border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(0, 0, 0, 0.24);
   display: flex;
   flex-direction: column;
 
@@ -274,15 +273,16 @@ export default {
     text-align: center;
   }
   .left-side {
-    padding: 15px;
+    padding-right: 15px;
   }
   .right-side {
-    padding: 15px;
+    padding-left: 15px;
   }
 }
 
 /deep/ .el-form {
   div:not(.gender) {
+    margin-bottom: 25px;
     position: relative;
     .el-form-item__label {
       position: absolute;
@@ -293,9 +293,9 @@ export default {
       z-index: 2;
       width: fit-content !important;
       background-color: #fff !important;
-      //   border: 1px solid gray;
-      border-radius: 5px;
-      font-size: 10px;
+      border: 1px solid #dcdfe6;
+      // border-radius: 5px;
+      font-size: 12px;
       margin-left: 10px;
       padding: 0 5px;
       line-height: 12px;
@@ -304,6 +304,7 @@ export default {
       position: relative;
       font-size: 12px;
       margin: 0 !important;
+    
       .el-date-editor {
         width: 241px;
       }
@@ -311,6 +312,7 @@ export default {
         .el-input__inner {
           line-height: 15px;
           height: 30px;
+          // border:
         }
       }
 

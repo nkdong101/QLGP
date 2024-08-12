@@ -277,3 +277,42 @@ textarea {
 b {
   font-weight: 600;
 }
+
+
+/* For WebKit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+  transition: width 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Roundness of the scrollbar thumb */
+  border: 2px solid #f1f1f1; /* Padding around the thumb */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition for thumb and width */
+
+}
+
+// ::-webkit-scrollbar-thumb:hover,::-webkit-scrollbar-track:hover {
+//   width: 12px;
+//   background-color: #555; /* Color of the scrollbar thumb on hover */
+// }
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Default width */
+  scrollbar-color: #888 #f1f1f1; /* Color of the thumb and track */
+}
+
+// html:hover {
+//   scrollbar-width: auto; /* Increase width on hover */
+// }
+
+/* For IE10+ */
+* {
+  -ms-overflow-style: none; /* Hide the default scrollbar */
+}

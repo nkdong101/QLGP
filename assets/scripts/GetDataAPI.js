@@ -93,7 +93,7 @@ export default function ({
               if (!window.isApp) {
                 // localStorage.clear();
                 localStorage.err_message = data.ErrMessage;
-                location.href = "/Account/login";
+                location.href = "/Account/Home";
               }
               return;
             }

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import { Line, Bar, Pie } from 'vue-chartjs/legacy'
+import { QuillEditor } from '@vueup/vue-quill'
+
 
 import {
   Chart as ChartJS,
@@ -38,3 +40,4 @@ Vue.component('pie-chart', {
   extends: Pie,
 
 })
+

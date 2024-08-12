@@ -106,7 +106,7 @@ export default {
 
   .backdrop {
     // position: absolute;
-    font-family: "Lato", Arial, sans-serif;
+   
     // top: 50%;
     // left: 50%;
     // transform: translate(-50%, -50%);

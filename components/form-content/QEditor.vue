@@ -76,7 +76,7 @@ export default {
       if (source == "api") {
         console.log("An API call triggered this change.");
       } else if (source == "user") {
-        console.log("A user action triggered this change.");
+        // console.log("A user action triggered this change.");
         this.$emit("input", this.quill.root.innerHTML);
       }
     });
