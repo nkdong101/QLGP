@@ -24,7 +24,7 @@
           <el-avatar v-else size="small" :src="'/Images/avatar/' + data.Avatar.split('|')[0]" fit="cover"></el-avatar>
           </el-col>
           <el-col :span="6">
-            
+
             {{ data.Name }}
             {{ data.Other_Name ? `(${data.Other_Name})` : "" }}
           </el-col>
@@ -44,7 +44,7 @@
                   : data.Year_Of_Birth
               }}</span
             >
-           
+
             <span v-if="data.Date_of_death">
               <i class="fa fa-chain-broken" aria-hidden="true"></i>
               {{ ConvertStr.ToDateStr(data.Date_of_death) }}</span
@@ -68,7 +68,7 @@
         >
           <i class="fa fa-plus"></i>
         </el-button>
-    
+
         <el-button
           type="warning"
           v-if="node.level === 2"
@@ -167,9 +167,9 @@ export default {
           }
         },
         Save: () => {
-         
+
           this.form.obj.Dongho_id = this.user.Dongho_id;
-        
+
           this.$refs.form.getValidate().then((re) => {
             if (!re) {
               ShowMessage("Vui lòng nhập đầy đủ thông tin", MessageType.error);
@@ -259,7 +259,7 @@ export default {
   },
   methods: {
     EditVo(obj){
-    
+
       this.form.ShowForm("Sửa thông tin của " + obj.Name + "", obj, false,true);
     },
     SaveCR() {
@@ -291,7 +291,7 @@ export default {
 .el-tree {
   height: 100%;
   overflow: auto;
-  /deep/.el-tree-node.is-expanded {
+  ::v-deep .el-tree-node.is-expanded {
     // height: 100%;
     // display: flex;
     // flex-direction: column;
@@ -302,7 +302,7 @@ export default {
     // }
   }
 }
-/deep/.el-tree-node
+::v-deep .el-tree-node
   > .el-tree-node__children
   > .el-tree-node
   > .el-tree-node__content {
@@ -311,7 +311,7 @@ export default {
   /* Empty to ensure children are not affected */
 }
 
-/deep/.el-tree-node__content {
+::v-deep .el-tree-node__content {
   height: unset;
 }
 

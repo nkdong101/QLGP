@@ -4,7 +4,7 @@
     <Nuxt />
     <Footer ></Footer>
 
-  
+
   </div>
 </template>
 
@@ -23,9 +23,9 @@ export default {
     //   console.log(e, this);
     // },
     loginClick(isAdd){
-    
+
       this.isAdd = isAdd;
-     
+
     }
   },
   mounted() {
@@ -40,6 +40,7 @@ export default {
           header.$el.classList.remove("scrolled");
         }
       });
+      console.log(window.scrollY);
     });
   },
 };

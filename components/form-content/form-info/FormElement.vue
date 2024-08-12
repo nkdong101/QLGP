@@ -44,7 +44,7 @@
           :id="model.id"
           ref="entry"
           @onChange="componentsValueChange"
- 
+
           v-model.lazy="elementValue"
           :disabled="disabled"
         ></component>
@@ -621,7 +621,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/deep/ .has-border {
+::v-deep  .has-border {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -645,12 +645,12 @@ export default {
 }
 
 .quill-container {
-  /deep/ .ql-editor {
+  ::v-deep  .ql-editor {
     height: 400px;
     word-break: break-word;
   }
 }
-/deep/ .form-title {
+::v-deep  .form-title {
   border: 0;
   background: white;
 }

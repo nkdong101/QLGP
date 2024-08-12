@@ -300,7 +300,7 @@ export default {
     border-bottom: 1px solid #ddd;
     border-right: 1px solid #ddd;
 
-    /deep/ {
+    ::v-deep  {
       td,
       th {
         padding: 10px;
@@ -328,7 +328,7 @@ export default {
       &[role="1"] {
         color: blue;
 
-        /deep/ input {
+        ::v-deep  input {
           color: blue;
         }
       }

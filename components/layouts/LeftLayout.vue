@@ -52,7 +52,7 @@ export default {
       height: 100%;
     }
   }
-  /deep/ .scrollbar-wrapper {
+  ::v-deep  .scrollbar-wrapper {
     overflow-x: hidden;
   }
   .menu-link {

@@ -21,11 +21,11 @@ $bg_color: white;
     margin-bottom: 5px;
   }
 }
-/deep/.tablecenter {
+::v-deep .tablecenter {
   text-align: center;
 }
 @media only screen and (max-width: 900px) {
-  /deep/ .parammobile {
+  ::v-deep  .parammobile {
     .el-tooltip {
       flex-direction: column;
       width: 100%;
@@ -34,13 +34,13 @@ $bg_color: white;
       }
     }
   }
-  /deep/.main-input-control {
+  ::v-deep .main-input-control {
     width: 100%;
   }
-  /deep/.el-button--mini {
+  ::v-deep .el-button--mini {
     margin-bottom: 5px;
   }
-  /deep/.ButtonPermission {
+  ::v-deep .ButtonPermission {
     margin-bottom: 33px !important;
   }
 }

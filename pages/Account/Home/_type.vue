@@ -6,7 +6,9 @@
         <dowload_link></dowload_link>
       </div>
       <div>{{ type }}</div>
-      <div v-if="!isAdd" class="hero-section-content">
+      <Login_form v-if="type == 'dang-nhap'"></Login_form>
+
+      <div v-else class="hero-section-content">
         <h3>Tiếp nối giá trị truyền thống bằng công nghệ</h3>
         <p style="padding-top: 20px">
           Văn hóa là nguồn cội, là bản sắc, là giá trị tinh thần được cha ông ta
@@ -18,7 +20,6 @@
         </p>
       </div>
 
-      <Login_form v-else></Login_form>
     </div>
 
     <div class="intro">
@@ -59,7 +60,7 @@
             mình!</i
           >
         </div>
-        <component :is="'Register'" />
+        <Register />
       </div>
     </div>
     <Comment id="gop-y" />
@@ -77,14 +78,14 @@ export default {
     };
   },
 
-//   watch: {
-//     '$route': {
-//       deep: true,
-//       handler() {
-//         console.log(this.type);
-//       },
-//     },
-//   },
+  watch: {
+    $route: {
+      deep: true,
+      handler() {
+        console.log(this.type);
+      },
+    },
+  },
   computed: {
     type() {
       return this.$route.params.type;
@@ -96,10 +97,12 @@ export default {
     // },
   },
   mounted() {
-    console.log(this);
+    // console.log(this);
     this.$nextTick(() => {
-        console.log(document.getElementById(this.type))
-      document.getElementById(this.type).scrollIntoView();
+      // console.log(document.getElementById(this.type));
+      setTimeout(() => {
+        document.getElementById(this.type).scrollIntoView();
+      }, 0);
     });
   },
 };
@@ -199,7 +202,7 @@ export default {
     .intro-content {
       width: 100%;
       margin-top: 20px;
-      /deep/.el-row {
+      ::v-deep .el-row {
         .el-col {
           .el-card {
             border: 2px solid #1e6248;

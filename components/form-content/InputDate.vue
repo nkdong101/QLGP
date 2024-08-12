@@ -115,7 +115,7 @@ export default {
   flex: 1;
   // background: red;
   .input-date {
-    /deep/ input {
+    ::v-deep  input {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }

@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/.main-table {
+::v-deep .main-table {
   .el-table__header-wrapper {
     display: none;
   }

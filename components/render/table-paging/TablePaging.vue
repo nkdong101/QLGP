@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="main-table" style="display:flex;align-items: flex-start;">
-      
+
       <el-table
         v-if="isVisible"
         :empty-text="
@@ -696,7 +696,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  /deep/ .el-table__header-wrapper table {
+  ::v-deep  .el-table__header-wrapper table {
     border-top: 1px solid #efefef !important;
   }
   .main-table {
@@ -735,7 +735,7 @@ export default {
       }
     }
   }
-  /deep/ .table-header {
+  ::v-deep  .table-header {
     th {
       padding: 10px 0px;
       color: #2a4b69;
@@ -750,19 +750,19 @@ export default {
       }
     }
   }
-  /deep/ .el-table__row {
+  ::v-deep  .el-table__row {
     td {
       padding: 10px 0px;
       cursor: pointer;
     }
   }
-  /deep/ .el-table .cell.el-tooltip {
+  ::v-deep  .el-table .cell.el-tooltip {
     width: 100% !important;
     min-width: 0;
     line-height: 16px;
   }
 
-  /deep/ .el-table {
+  ::v-deep  .el-table {
     th {
       &.is-sortable {
         .cell {
@@ -787,34 +787,34 @@ export default {
       }
     }
   }
-  /deep/ .el-table--striped .el-table__body tr.el-table__row--striped td {
+  ::v-deep  .el-table--striped .el-table__body tr.el-table__row--striped td {
     background: #f4f5f6;
   }
-  /deep/ .el-table__body tr.hover-row.current-row > td,
-  /deep/ .el-table__body tr.hover-row.el-table__row--striped.current-row > td,
-  /deep/ .el-table__body tr.hover-row.el-table__row--striped > td,
-  /deep/ .el-table__body tr.hover-row > td {
+  ::v-deep  .el-table__body tr.hover-row.current-row > td,
+  ::v-deep  .el-table__body tr.hover-row.el-table__row--striped.current-row > td,
+  ::v-deep  .el-table__body tr.hover-row.el-table__row--striped > td,
+  ::v-deep  .el-table__body tr.hover-row > td {
     background-color: #e2ecf8;
   }
-  /deep/
+  ::v-deep
     .el-table--striped
     .el-table__body
     tr.el-table__row--striped.current-row
     td,
-  /deep/ .el-table__body tr.current-row > td {
+  ::v-deep  .el-table__body tr.current-row > td {
     background-color: $swatch_1;
     color: white;
   }
-  /deep/ .el-table .el-table__fixed th.is-leaf {
+  ::v-deep  .el-table .el-table__fixed th.is-leaf {
     border-bottom: 0px;
   }
-  /deep/ .el-table td,
-  /deep/ .el-table th.is-leaf {
+  ::v-deep  .el-table td,
+  ::v-deep  .el-table th.is-leaf {
     border-bottom: 1px solid #ddd;
   }
-  /deep/ .el-table--border td,
-  /deep/ .el-table--border th,
-  /deep/
+  ::v-deep  .el-table--border td,
+  ::v-deep  .el-table--border th,
+  ::v-deep
     .el-table__body-wrapper
     .el-table--border.is-scrolling-left
     ~ .el-table__fixed {
@@ -832,7 +832,7 @@ export default {
       padding-left: 10px;
     }
   }
-  /deep/ {
+  ::v-deep  {
     .el-table--border .el-table__cell,
     .el-table__body-wrapper
       .el-table--border.is-scrolling-left
@@ -841,17 +841,17 @@ export default {
     }
   }
 
-  /deep/ .el-table tr {
+  ::v-deep  .el-table tr {
     &.danger-row {
       color: #f44336;
     }
   }
-  /deep/
+  ::v-deep
     .el-table--striped
     .el-table__body
     tr.danger-row.el-table__row--striped.current-row
     td,
-  /deep/ .el-table__body tr.danger-row.current-row > td {
+  ::v-deep  .el-table__body tr.danger-row.current-row > td {
     color: #f44336;
   }
   .main-control {
@@ -877,7 +877,7 @@ export default {
       display: flex;
       align-items: flex-end;
     }
-    /deep/ .main-input-control {
+    ::v-deep  .main-input-control {
       flex: 1;
       padding: 5px;
       &:empty {
@@ -888,7 +888,7 @@ export default {
         @include control-container;
       }
     }
-    /deep/ .para-control {
+    ::v-deep  .para-control {
       @include control-container;
     }
     .main-control-btn {
@@ -921,11 +921,11 @@ export default {
       padding-left: 5px;
     }
   }
-  /deep/ .el-table.el-table--border {
+  ::v-deep  .el-table.el-table--border {
     border-top: 1px solid #ddd;
   }
-  /deep/ .el-table__fixed,
-  /deep/ .el-table__fixed-right {
+  ::v-deep  .el-table__fixed,
+  ::v-deep  .el-table__fixed-right {
     height: calc(100%) !important;
     border-right: 1px solid #ddd;
 
@@ -933,19 +933,19 @@ export default {
       //   height: calc(100% - 35px) !important;
     }
   }
-  /deep/ .el-table--scrollable-x {
+  ::v-deep  .el-table--scrollable-x {
     .el-table__fixed,
     .el-table__fixed-right {
       height: calc(100% - 15px) !important;
     }
   }
-  /deep/ .el-table__body-wrapper.is-scrolling-left ~ .el-table__fixed,
-  /deep/ .el-table__body-wrapper.is-scrolling-none ~ .el-table__fixed,
-  /deep/ .el-table__body-wrapper.is-scrolling-none ~ .el-table__fixed-right,
-  /deep/ .el-table__body-wrapper.is-scrolling-right ~ .el-table__fixed-right {
+  ::v-deep  .el-table__body-wrapper.is-scrolling-left ~ .el-table__fixed,
+  ::v-deep  .el-table__body-wrapper.is-scrolling-none ~ .el-table__fixed,
+  ::v-deep  .el-table__body-wrapper.is-scrolling-none ~ .el-table__fixed-right,
+  ::v-deep  .el-table__body-wrapper.is-scrolling-right ~ .el-table__fixed-right {
     border-right: 0px;
   }
-  /deep/ .el-table {
+  ::v-deep  .el-table {
     .cell {
       line-height: 20px;
       white-space: normal;

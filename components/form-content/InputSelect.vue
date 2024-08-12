@@ -409,9 +409,9 @@ export default {
         if (!this.model.remote) {
           if (!Object.equals(val, oldVal)) {
             if (!this.firstLoad) this.$emit("input", "");
-            if (oldVal[0]) {
+            // if (oldVal[0]) {
               this.Init();
-            }
+            // }
           }
         }
       },
@@ -476,13 +476,13 @@ export default {
 .el-select {
   min-width: 0 !important;
 }
-/deep/ .is-disabled {
+::v-deep  .is-disabled {
   .el-input__suffix {
     display: none;
   }
 }
 
-/deep/ .el-input__inner {
+::v-deep  .el-input__inner {
   padding-right: 30px !important;
 }
 </style>

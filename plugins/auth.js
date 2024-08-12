@@ -23,10 +23,12 @@ export const $auth = {
       Identity: this.identity,
       SourceAuth: location.origin,
     });
+    let _user = JSON.parse(user);
+    StoreManager.SetUser(_user)
     // if (!this.user)
     //   return this.userinfo();
-    if (user) {
-      this.user = user;
+    if (_user) {
+      this.user = _user;
     } else {
       return this.userinfo();
     }

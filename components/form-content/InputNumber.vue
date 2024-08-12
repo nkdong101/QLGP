@@ -152,7 +152,7 @@ export default {
 
 
 <style lang="scss" scoped>
-/deep/ input {
+::v-deep  input {
   &:not([is-focus]) {
     text-align: right !important;
     padding-right: 5px !important;

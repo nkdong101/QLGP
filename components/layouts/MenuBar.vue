@@ -28,7 +28,7 @@
         <!-- <ButtonPermission /> -->
       </div>
       <div class="menu-profiles">
-        
+
         <Avatar />
       </div>
     </div>
@@ -168,7 +168,7 @@ export default {
   height: 45px;
 
   // border-bottom: 1px solid #ddd;
-  /deep/ .el-menu {
+  ::v-deep  .el-menu {
     >div>.el-menu-item {
       height: 45px;
       line-height: 45px;
@@ -209,7 +209,7 @@ export default {
     align-items: center;
     padding-left: 10px;
 
-    /deep/ .el-button-group {
+    ::v-deep  .el-button-group {
       white-space: nowrap;
       display: flex;
     }
@@ -230,7 +230,7 @@ export default {
   align-items: center;
 }
 
-/deep/ {
+::v-deep  {
   .el-breadcrumb__inner a,
   .el-breadcrumb__inner.is-link {
     color: rgb(70, 79, 235);

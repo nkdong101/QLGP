@@ -77,15 +77,15 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
   }
-  /deep/ .el-icon-close-tip {
+  ::v-deep  .el-icon-close-tip {
     display: none !important;
   }
-  /deep/ .el-upload-list__item:focus {
+  ::v-deep  .el-upload-list__item:focus {
     .el-icon-close {
       display: inline-block;
     }
   }
-  /deep/ .el-upload {
+  ::v-deep  .el-upload {
     width: 100%;
     .el-input-group__prepend {
       background: #409eff;
@@ -101,7 +101,7 @@
       }
     }
   }
-  /deep/ .el-upload-list__item-name {
+  ::v-deep  .el-upload-list__item-name {
     cursor: pointer;
   }
 }
@@ -132,7 +132,7 @@
     justify-content: center;
   }
 
-  /deep/ .el-upload--text {
+  ::v-deep  .el-upload--text {
     display: flex;
     & > div {
       display: flex;

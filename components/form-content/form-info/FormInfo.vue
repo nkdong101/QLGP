@@ -167,7 +167,7 @@ export default {
 .form-info {
   font-size: 13px;
   .form-info-c,
-  /deep/ .form-element-child-vertical {
+  ::v-deep  .form-element-child-vertical {
     margin-bottom: -5px;
     & > *:empty {
       display: none !important;
@@ -182,7 +182,7 @@ export default {
   }
 }
 [label-top] {
-  /deep/ .input-c {
+  ::v-deep  .input-c {
     display: flex;
     flex-direction: column;
     .el-input-group__prepend {

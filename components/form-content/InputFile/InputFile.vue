@@ -406,14 +406,14 @@
     // border-style: dashed;
     border-radius: 4px;
     // border: 1px solid #ddd;
-    /deep/ .el-upload--text {
+    ::v-deep  .el-upload--text {
       margin: 0;
     }
     &[has-limit] {
-      /deep/ .el-upload-list__item:first-child {
+      ::v-deep  .el-upload-list__item:first-child {
         margin-top: 0;
       }
-      /deep/ .el-upload--text {
+      ::v-deep  .el-upload--text {
         margin: 0;
       }
     }
@@ -424,34 +424,34 @@
       border-top-right-radius: 0px;
     }
     &:not([has-title]) {
-      /deep/ .el-upload {
+      ::v-deep  .el-upload {
         margin: 0;
       }
     }
     &[view-only] {
-      /deep/ .el-upload {
+      ::v-deep  .el-upload {
         display: none;
         margin-bottom: 0px;
       }
     }
-    /deep/ .el-upload-list--picture-card {
+    ::v-deep  .el-upload-list--picture-card {
       display: flex;
       flex-wrap: wrap;
       margin-bottom: -8px;
     }
-    /deep/ .el-input--mini input {
+    ::v-deep  .el-input--mini input {
       padding: 0 5px;
     }
   }
-  /deep/ .el-icon-close-tip {
+  ::v-deep  .el-icon-close-tip {
     display: none !important;
   }
-  /deep/ .el-upload-list__item:focus {
+  ::v-deep  .el-upload-list__item:focus {
     .el-icon-close {
       display: inline-block;
     }
   }
-  /deep/ .el-upload {
+  ::v-deep  .el-upload {
     width: 100%;
 
     height: inherit;
@@ -472,18 +472,18 @@
       }
     }
   }
-  /deep/ .el-upload-list.is-disabled .el-upload-list__item {
+  ::v-deep  .el-upload-list.is-disabled .el-upload-list__item {
     margin-top: 0;
   }
-  /deep/ .el-upload-list--picture-card .el-upload-list__item {
+  ::v-deep  .el-upload-list--picture-card .el-upload-list__item {
     width: 80px;
     height: 80px;
   }
-  /deep/ .el-upload-list__item-name {
+  ::v-deep  .el-upload-list__item-name {
     cursor: pointer;
   }
 }
-/deep/ .el-carousel__button {
+::v-deep  .el-carousel__button {
   background: #66b1ff;
 }
 .input-file-type-avatar {
@@ -514,7 +514,7 @@
     min-height: 120px;
     // border: 1px solid #ddd;
   }
-  /deep/ .el-upload {
+  ::v-deep  .el-upload {
     display: flex;
     height: auto;
     width: 100%;
@@ -541,7 +541,7 @@
     }
   }
 
-  /deep/ .el-upload--text {
+  ::v-deep  .el-upload--text {
     display: flex;
 
     i {
@@ -558,12 +558,12 @@
   }
 
   &[disabled] {
-    /deep/ .el-upload {
+    ::v-deep  .el-upload {
       display: none;
     }
   }
 }
-/deep/ .file-input-preview-ic {
+::v-deep  .file-input-preview-ic {
   position: absolute;
   top: 50%;
   left: 50%;

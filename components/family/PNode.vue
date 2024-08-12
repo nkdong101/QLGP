@@ -20,8 +20,8 @@
         <div class="img">
           <el-avatar v-if="!person.Avatar" icon="el-icon-user-solid"></el-avatar>
           <el-avatar v-else :src="'/Images/avatar/' + person.Avatar.split('|')[0]" fit="fill"></el-avatar>
-        
-        
+
+
         </div>
         <div class="infor">
           <el-row type="flex" align="middle" :gutter="10">
@@ -34,7 +34,7 @@
               >
 
               <el-tooltip class="item"  :content="'Thêm ' + (person.Gender == 1 ? 'vợ' : 'chồng')" placement="top-start">
-  
+
 
                 <el-button
           type="primary"
@@ -47,7 +47,7 @@
     </el-tooltip>
 
 
-             
+
             </el-col>
             <!-- <el-col :span="8">Số điện thoại: {{ person.Phone }}</el-col> -->
           </el-row>
@@ -60,11 +60,11 @@
                 person.Birthday
                   ? ConvertStr.ToDateStr(person.Birthday)
                   : person.Year_Of_Birth
-              }}</span> 
+              }}</span>
               <span v-if="person.Date_of_death">
                 <i class="fa fa-chain-broken" aria-hidden="true"></i>
               {{
-               ConvertStr.ToDateStr(person.Date_of_death) 
+               ConvertStr.ToDateStr(person.Date_of_death)
               }}</span>
 
               </span>
@@ -95,21 +95,21 @@
                 {{person.Description}}
               </p>
 
-             
+
             </el-col>
             <!-- <el-col  :span="8">
               <span></span>
             </el-col>
             <el-col  :span="8">
-              
+
             </el-col> -->
           </el-row>
           <!-- <el-row>
             <el-col :span="8">CCCD/CMND</el-col>
             <el-col :span="8">Email</el-col>
-          
-           
-            
+
+
+
         </el-row> -->
         </div>
       </div>
@@ -194,7 +194,7 @@ export default {
     //     //     // this.form.visible = true;
     //     //   },
     //     // });
-       
+
     //     break;
     // }
     // console.log("mounted", this.Pid);
@@ -209,7 +209,7 @@ export default {
   padding: 5px;
   border-radius: 10px;
   //   background-color: ;
-  /deep/.el-card__body {
+  ::v-deep .el-card__body {
     padding: 0 !important;
     display: flex;
     flex-direction: column;

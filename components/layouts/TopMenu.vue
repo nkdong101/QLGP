@@ -3,34 +3,27 @@
     <div class="header-logo"></div>
     <div class="header-menu">
       <el-menu
-        default-active="1"
+        :default-active="$route.path"
         class="el-menu"
         mode="horizontal"
-        @select="handleSelect"
         active-text-color="#fff"
         text-color="#f1f1f1"
+        :router="true"
       >
-        <el-menu-item @click="menuClick" index="1"
-          >
+        <el-menu-item @click="menuClick" index="/Account/Home/dang-nhap">
           <!-- <a style="" href="#hero-section">Đăng nhập</a> -->
           <nuxt-link to="/Account/Home/dang-nhap">Đăng nhập</nuxt-link>
-          </el-menu-item
-        >
-        <el-menu-item @click="menuClick" index="2"
-          >
+          <!-- Đăng nhập -->
+        </el-menu-item>
+        <el-menu-item @click="menuClick" index="/Account/Home/dang-ky">
           <!-- <a href="#reigter">Đăng ký sử dụng</a> -->
           <nuxt-link to="/Account/Home/dang-ky">Đăng ký sử dụng</nuxt-link>
-         
-         
-          </el-menu-item
-        >
-        <el-menu-item @click="menuClick" index="3"
-          >
+          <!-- Đăng ký sử dụng -->
+        </el-menu-item>
+        <el-menu-item @click="menuClick"  index="/Account/Home/gop-y">
           <!-- <a href="#Comment">Góp ý</a> -->
           <nuxt-link to="/Account/Home/gop-y">Góp ý</nuxt-link>
-
-          </el-menu-item
-        >
+        </el-menu-item>
         <!-- <el-submenu index="2">
           <template slot="title"></template>
           <el-menu-item index="2-1">item one</el-menu-item>
@@ -86,7 +79,7 @@ export default {
     .el-menu {
       border: 0;
       background-color: inherit !important;
-      /deep/ li {
+      ::v-deep li {
         letter-spacing: 0.02em;
         position: relative;
         background-color: inherit !important;

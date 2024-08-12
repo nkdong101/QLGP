@@ -90,7 +90,7 @@ export default {
   },
   methods: {},
   computed: {
-   
+
     width: function () {
       let defaultFormWidth = "500px";
       if (typeof this.model.width == "function") {
@@ -117,7 +117,7 @@ export default {
     padding: 0;
   }
 }
-/deep/ .el-dialog {
+::v-deep  .el-dialog {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   &.is-fullscreen {
@@ -172,11 +172,11 @@ export default {
   }
 }
 
-/deep/ .modal-body {
+::v-deep  .modal-body {
   padding: 5px;
   //   padding-bottom: 0;
 }
-/deep/ .modal-footer {
+::v-deep  .modal-footer {
   padding: 0px;
   border: 0px;
 }
@@ -186,7 +186,7 @@ export default {
   padding: 7px 15px;
   font-size: 13px;
 }
-/deep/ .el-col {
+::v-deep  .el-col {
   //   margin-bottom: -5px;
   > div:not(.el-row):not(.el-col) {
     &:not(:empty) {
@@ -200,7 +200,7 @@ export default {
 .form-c {
   //   margin-bottom: -5px;
 
-  /deep/ .el-row {
+  ::v-deep  .el-row {
     &:not(:empty) {
       margin-bottom: 5px;
     }
@@ -214,12 +214,12 @@ export default {
 }
 .el-dialog__wrapper {
   padding: 0 5px;
-  /deep/ .el-dialog {
+  ::v-deep  .el-dialog {
     max-width: 100%;
   }
 }
 
-/deep/ .el-input__inner {
+::v-deep  .el-input__inner {
   padding: 0 5px;
 }
 </style>

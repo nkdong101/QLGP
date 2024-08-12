@@ -25,9 +25,9 @@ export default {
   },
   data() {
     return {
-   
+
       vFamilyTree: FamilyTree,
-     
+
     };
   },
   watch: {
@@ -285,7 +285,7 @@ export default {
       <g style="cursor: pointer;" id="base_tree_menu_close">
           <circle cx="12.5" cy="12.5" r="12" fill="#F57C00"></circle>
           ${FamilyTree.icon.close(25, 25, "#fff", 0, 0)}
-      </g>            
+      </g>
       <g id="base_up">
           <circle cx="115" cy="30" r="15" fill="#fff" stroke="#b1b9be" stroke-width="1"></circle>
           ${FamilyTree.icon.ft(20, 80, "#6bb4df", 105, -10)}
@@ -331,7 +331,7 @@ export default {
           FamilyTree.attr.width +
           ' ="60" style="font-size: 12px;" fill="black" x="47" y="112" text-anchor="middle">{val}</text>',
 
-        img_0: `<use xlink:href="#base_img_0_stroke" /> 
+        img_0: `<use xlink:href="#base_img_0_stroke" />
        <circle id="base_img_0_stroke" fill="#b1b9be" cx="45" cy="62" r="37"/>
       <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`,
 
@@ -343,18 +343,18 @@ export default {
                                         }
                                         .{randId}.male .bft-edit-form-header, .{randId}.male .bft-img-button{
                                             background-color: #6bb4df;
-                                        }        
+                                        }
                                         .{randId}.male div.bft-img-button:hover{
                                             background-color: #cb4aaf;
                                         }
                                         .{randId}.female .bft-edit-form-header, .{randId}.female .bft-img-button{
                                             background-color: #cb4aaf;
-                                        }        
+                                        }
                                         .{randId}.female div.bft-img-button:hover{
                                             background-color: #6bb4df;
                                         }
     </style>
-        
+
         `,
         plus:
           '<circle cx="106" cy="-13" r="10" fill="#b1b9be" stroke="#fff" stroke-width="1"><title>Expand</title></circle>' +
@@ -368,7 +368,7 @@ export default {
           '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#6bb4df" rx="5" ry="5"></rect>' +
           '<rect x="0" y="0" height="20" width="{w}" fill="#6bb4df" stroke-width="1" stroke="#6bb4df" rx="5" ry="5"></rect>' +
           '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#6bb4df"></line>',
-        img_0: `<use xlink:href="#base_img_0_stroke" /> 
+        img_0: `<use xlink:href="#base_img_0_stroke" />
        <circle id="base_img_0_stroke" fill="#6bb4df" cx="45" cy="62" r="37"/>
       <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`,
         plus:
@@ -390,7 +390,7 @@ export default {
           '<rect x="0" y="0" height="{h}" width="{w}" fill="#ffffff" stroke-width="3" stroke="#cb4aaf" rx="5" ry="5"></rect>' +
           '<rect x="0" y="0" height="20" width="{w}" fill="#cb4aaf" stroke-width="1" stroke="#cb4aaf" rx="5" ry="5"></rect>' +
           '<line x1="0" y1="20" x2="250" y2="20" stroke-width="5" stroke="#cb4aaf"></line>',
-        img_0: `<use xlink:href="#base_img_0_stroke" /> 
+        img_0: `<use xlink:href="#base_img_0_stroke" />
        <circle id="base_img_0_stroke" fill="#cb4aaf" cx="45" cy="62" r="37"/>
       <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="10" y="26" width="72" height="72"></image>`,
         plus:
@@ -415,13 +415,13 @@ export default {
                                         }
                                         .{randId}.male .bft-edit-form-header, .{randId}.male .bft-img-button{
                                             background-color: #6bb4df;
-                                        }        
+                                        }
                                         .{randId}.male div.bft-img-button:hover{
                                             background-color: #cb4aaf;
                                         }
                                         .{randId}.female .bft-edit-form-header, .{randId}.female .bft-img-button{
                                             background-color: #cb4aaf;
-                                        }        
+                                        }
                                         .{randId}.female div.bft-img-button:hover{
                                             background-color: #6bb4df;
                                         }
@@ -447,7 +447,7 @@ export default {
     tm_single_male() {
       return {
         node: '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#6bb4df" ></circle>',
-        img_0: `<use xlink:href="#base_img_1_stroke"/> 
+        img_0: `<use xlink:href="#base_img_1_stroke"/>
        <circle id="base_img_1_stroke" fill="#6bb4df" cx="100" cy="62" r="37"/>
       <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_1)" xlink:href="{val}" x="65" y="26" width="72" height="72"></image>`,
       };
@@ -455,7 +455,7 @@ export default {
     tm_single_female() {
       return {
         node: '<circle cx="100" cy="100" r="100" fill="white" stroke-width="3" stroke="#cb4aaf" ></circle>',
-        img_0: `<use xlink:href="#base_img_1_stroke"/> 
+        img_0: `<use xlink:href="#base_img_1_stroke"/>
        <circle id="base_img_1_stroke" fill="#cb4aaf" cx="100" cy="62" r="37"/>
       <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_1)" xlink:href="{val}" x="65" y="26" width="72" height="72"></image>`,
       };
@@ -480,7 +480,7 @@ export default {
   height: 100%;
   overflow: hidden;
   position: relative;
-  /deep/ .bft-family-menu {
+  ::v-deep  .bft-family-menu {
     min-width: fit-content;
     display: flex;
     // left: 320px !important;

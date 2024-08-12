@@ -2,13 +2,11 @@
   <div class="regis">
     <div style="display: flex; align-items: baseline">
       <div class="left-side">
-       <!-- <p class="title" style="margin: 20px 0">Thông tin đăng nhập</p>
+        <!-- <p class="title" style="margin: 20px 0">Thông tin đăng nhập</p>
 
         -->
-       
 
         <el-form
-
           :model="objUSer"
           :rules="rules"
           ref="objUSer"
@@ -109,14 +107,17 @@
             ></el-input>
           </el-form-item>
           <!-- <el-form-item>
-          
-          
+
+
           </el-form-item> -->
         </el-form>
       </div>
     </div>
-    <div style="text-align:center;padding:20px 0 0 0;" >
-      <el-button type="primary" style="padding: 8px 30%;font-size:16px;" @click="submitForm('objUSer', 'Dongho_Info')"
+    <div style="text-align: center; padding: 20px 0 0 0">
+      <el-button
+        type="primary"
+        style="padding: 8px 30%; font-size: 16px"
+        @click="submitForm('objUSer', 'Dongho_Info')"
         >Khởi tạo</el-button
       >
     </div>
@@ -207,14 +208,13 @@ export default {
             this.$refs.tinh.selectedData
           );
           // this.tinhSeleceted = this.$refs.tinh.selectedData
-          this.list_huyen = new SelectOption({
-            data: this.$refs.tinh.selectedData.Childs,
-          });
+
+          this.list_huyen.data = this.$refs.tinh.selectedData.Childs;
+        this.Dongho_Info.Huyen_id = "";
+
         });
       } else {
-        this.list_huyen = new SelectOption({
-          data: [],
-        });
+        this.list_huyen.data = [];
         this.Dongho_Info.Huyen_id = "";
       }
 
@@ -280,7 +280,7 @@ export default {
   }
 }
 
-/deep/ .el-form {
+::v-deep .el-form {
   div:not(.gender) {
     margin-bottom: 25px;
     position: relative;
@@ -304,7 +304,7 @@ export default {
       position: relative;
       font-size: 12px;
       margin: 0 !important;
-    
+
       .el-date-editor {
         width: 241px;
       }

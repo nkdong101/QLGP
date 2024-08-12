@@ -406,7 +406,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .el-tree-node__content {
+::v-deep  .el-tree-node__content {
   height: auto;
 }
 .custom-tree-node {
@@ -432,25 +432,25 @@ export default {
   }
 }
 .el-tree {
-  /deep/ button {
+  ::v-deep  button {
     padding: 5px 10px;
     font-size: 13px;
     line-height: 13px;
   }
 
-  /deep/ img {
+  ::v-deep  img {
     width: 13px;
     height: 13px;
   }
-  /deep/ .el-tree-node__content:hover {
+  ::v-deep  .el-tree-node__content:hover {
     background: #f5f7fa !important;
   }
 
-  /deep/ .el-tree-node:focus > .el-tree-node__content {
+  ::v-deep  .el-tree-node:focus > .el-tree-node__content {
     background: transparent;
   }
 
-  /deep/ .el-tree-node {
+  ::v-deep  .el-tree-node {
     &.is-expanded {
       & > .el-tree-node__content {
         // font-weight: bold;
@@ -463,7 +463,7 @@ export default {
       margin-right: 5px;
     }
   }
-  /deep/ [btn-container] {
+  ::v-deep  [btn-container] {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: -5px;

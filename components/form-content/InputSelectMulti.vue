@@ -136,7 +136,7 @@ export default {
       }
     }
   }
-  /deep/ input {
+  ::v-deep  input {
     border-bottom-right-radius: 0;
   }
 }

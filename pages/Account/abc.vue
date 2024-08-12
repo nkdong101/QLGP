@@ -79,7 +79,7 @@ export default {
     // onWheel(e) {
     //   console.log(e, this);
     // },
-    
+
   },
   mounted(){
     console.log(this)
@@ -181,7 +181,7 @@ export default {
     .intro-content {
       width: 100%;
       margin-top: 20px;
-      /deep/.el-row {
+      ::v-deep .el-row {
         .el-col {
           .el-card {
             border: 2px solid #1e6248;

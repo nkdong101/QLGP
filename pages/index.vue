@@ -6,7 +6,7 @@
       cursor: isPanning ? 'move' : 'auto',
     }"
   >
- 
+
     <div
       ref="svgContainer"
       class="svgContainer"
@@ -116,8 +116,8 @@
           v-model.lazy="tieusu"
           class="quill-container"
         />
-          </div> 
-         
+          </div>
+
         </div>
       </div>
     </DefaultForm>
@@ -417,7 +417,7 @@ export default {
   // overflow: hidden;
   .form-info {
     height: 100%;
-    /deep/ .form-info-c {
+    ::v-deep  .form-info-c {
       height: 100%;
       display: flex;
       overflow: hidden;
@@ -465,7 +465,7 @@ export default {
     }
   }
 }
-.fm /deep/ .form-info .form-info-c > .el-row {
+.fm ::v-deep  .form-info .form-info-c > .el-row {
   justify-content: center;
 }
 

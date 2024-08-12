@@ -1,5 +1,5 @@
 <template>
- 
+
       <div class="login-form">
         <div class="login-banner">Gia phả</div>
         <div class="title">Đăng nhập hệ thống</div>
@@ -70,7 +70,7 @@
               > -->
         </div>
       </div>
-  
+
 </template>
 
 <script>
@@ -343,7 +343,7 @@ export default {
         div:first-child {
           display: flex;
           flex-direction: column;
-          /deep/ button {
+          ::v-deep  button {
             transition: all .2s ease-in;
             &:hover {
               // box-shadow: #d1d1d1 1px 4px 12px;

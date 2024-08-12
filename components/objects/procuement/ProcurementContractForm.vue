@@ -234,7 +234,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  /deep/ .el-slider__marks-text {
+  ::v-deep  .el-slider__marks-text {
     white-space: nowrap;
   }
 }

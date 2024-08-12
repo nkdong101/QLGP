@@ -66,7 +66,7 @@ import { LoginResult } from "~/assets/scripts/objects/LoginResult";
 import StoreManager from "~/assets/scripts/StoreManager";
 export default {
   data() {
-    StoreManager.SetUser(JSON.parse(localStorage.user))
+
     return {
       // user: JSON.parse(localStorage.user),
       profile_pop_visible: false,
@@ -117,12 +117,12 @@ export default {
       localStorage.clear();
 
           this.$router.push("/Account/Home");
-    
+
     },
   },
   computed:{
     // user(){
-    //   return 
+    //   return
     // }
   },
   beforeMount(){

@@ -9,7 +9,6 @@
         <el-form
 
 :model="cmOb"
-:rules="rules"
 ref="CmForm"
 label-width="120px"
 class="cm-form"
@@ -30,12 +29,12 @@ label-position="top"
   }"   size="medium" type="textarea" v-model="cmOb.Content_cm"></el-input>
 </el-form-item>
 
-</el-form-item> 
+</el-form-item>
 
 
 </el-form>
       </div>
-      
+
 
 
       <div style="text-align:center;padding:20px 0 0 0; width: 100%" class="footer">
@@ -64,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .Comment {
     background: #fff;
-    
+
   display: flex;
 //   padding-bottom: 30px;
   .Comment-left {
@@ -89,7 +88,7 @@ export default {
         // text-align: left;
         width: 70%;
         .cm-form{
-            /deep/ .el-form-item{
+            ::v-deep  .el-form-item{
                 .el-form-item__label{
                     font-size: 12px;
                     padding: 0 !important;
