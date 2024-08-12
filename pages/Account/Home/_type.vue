@@ -1,11 +1,11 @@
 <template lang="">
   <div>
     <div id="dang-nhap" class="hero-section">
-      <div class="hero-section-logo">
-        <img src="/images/vanhoaviet.png" />
+      <div :style="{ width: type == 'dang-nhap' ? '250px' : '' }" class="hero-section-logo">
+        <img :style="{ width: type == 'dang-nhap' ? '100%' : '250px' }" src="/images/vanhoaviet.png" />
         <dowload_link></dowload_link>
       </div>
-      <div>{{ type }}</div>
+      <!-- <div>{{ type }}</div> -->
       <Login_form v-if="type == 'dang-nhap'"></Login_form>
 
       <div v-else class="hero-section-content">
@@ -157,6 +157,7 @@ export default {
   background-size: auto, cover;
   padding: 0 20%;
   display: flex;
+  justify-content: space-evenly;
   padding-top: 120px;
   // align-items: center;
   // justify-content: center;
@@ -164,9 +165,13 @@ export default {
     height: 250px;
     margin-right: 20px;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items:    center;
     img {
-      height: 180px;
-      // width: 300px;
+    //   height: 180px;
+    //   // width: 300px;
+    //   width: 100%;
     }
   }
 

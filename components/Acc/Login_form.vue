@@ -251,7 +251,7 @@ export default {
       width: 300px;
       border-radius: 20px;
       padding: 20px;
-
+  height: fit-content;
       .backdrop-1 {
         position: absolute;
       }
