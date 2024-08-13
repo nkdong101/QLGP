@@ -10,13 +10,14 @@ export const authAPI = {
 }
 
 export const $auth = {
-
+  dongho_watching: null,
   user: null,
   access_token: null,
   identity: null,
   init(user) {
     this.access_token = localStorage.access_token;
     this.identity = localStorage.identity;
+    this.dongho_watching = localStorage.dongho_watching;
 
     StoreManager.SetHeaders({
       Authorization: `Bearer ${this.access_token}`,
@@ -25,6 +26,7 @@ export const $auth = {
     });
     let _user = JSON.parse(user);
     StoreManager.SetUser(_user)
+
     // if (!this.user)
     //   return this.userinfo();
     if (_user) {

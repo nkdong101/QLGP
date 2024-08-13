@@ -1,5 +1,10 @@
 <template lang="">
+
+
+
   <div class="regis">
+
+    
     <div style="display: flex; align-items: baseline">
       <div class="left-side">
         <!-- <p class="title" style="margin: 20px 0">Thông tin đăng nhập</p>
@@ -57,14 +62,14 @@
             <el-button @click="resetForm('objUSer')">Reset</el-button>
           </el-form-item> -->
         </el-form>
-        <!-- <div
+        <div
           @click="$emit('regiter', false)"
           style="cursor: pointer; width: fit-content"
         >
-          <i style="font-size: 10px; text-decoration: underline"
-            >Đã có tài khoản?</i
+          <el-button style="font-size: 12px; "
+            >Đã có tài khoản?</el-button
           >
-        </div> -->
+        </div>
       </div>
       <div class="right-side">
         <!-- <p class="title" style="margin: 20px 0">Thông tin dòng họ</p> -->
@@ -164,18 +169,29 @@ export default {
         Email: "",
       },
       rules: {
-        name: [
+        UserName: [
           {
             required: true,
-            message: "Please input Activity name",
+            message: "Vui lòng nhập trường này",
             trigger: "blur",
           },
+         
+        ],
+        Password: [
           {
-            min: 3,
-            max: 5,
-            message: "Length should be 3 to 5",
+            required: true,
+            message: "Vui lòng nhập trường này",
             trigger: "blur",
           },
+         
+        ],
+        FullName: [
+          {
+            required: true,
+            message: "Vui lòng nhập trường này",
+            trigger: "blur",
+          },
+         
         ],
       },
       rules_Dongho_Info: {

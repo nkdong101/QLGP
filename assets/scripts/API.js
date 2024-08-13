@@ -44,6 +44,8 @@ export default {
   // GetTree : linkAPI + "Giapha/GetTree",
   Giapha : linkAPI + "Giapha",
   Dongho : linkAPI + "Dongho",
+  Reports_Home : linkAPI + "Reports/Home",
+  Comments_Send : linkAPI + "Comments/Send",
 
 
 }

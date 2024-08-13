@@ -40,7 +40,7 @@ export default {
           header.$el.classList.remove("scrolled");
         }
       });
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
     });
   },
 };

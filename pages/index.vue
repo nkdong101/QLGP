@@ -34,7 +34,19 @@
             <circle cx="11" cy="11" r="2" fill="#aeaeae"></circle>
             <circle cx="18" cy="11" r="2" fill="#aeaeae"></circle>
           </g>
-
+          <g id="base_up">
+                <circle cx="15" cy="15" r="15" fill="#fff" stroke="#aeaeae" stroke-width="1"></circle>
+                <svg width="20" height="20" x="5" y="5" viewBox="0 0 512 512">
+                <path fill="#aeaeae" d="m336.061 377.731c-5.086-6.54-14.511-7.717-21.049-2.631l-44.012 34.231v-200.331c0-8.284-6.716-15-15-15s-15 6.716-15 15v200.331l-44.011-34.231c-6.538-5.086-15.962-3.908-21.049 2.631-5.086 6.539-3.908 15.963 2.631 21.049l62.429 48.556v49.664c0 8.284 6.716 15 15 15s15-6.716 15-15v-49.664l62.429-48.556c6.54-5.086 7.717-14.51 2.632-21.049z"></path>
+                <path fill="#aeaeae" d="m271 497v-49.664l62.429-48.556c6.54-5.086 7.717-14.51 2.631-21.049-5.086-6.54-14.511-7.717-21.049-2.631l-44.011 34.231v-200.331c0-8.284-6.716-15-15-15v318c8.284 0 15-6.716 15-15z"></path>
+                <path fill="#aeaeae" d="m320 512h-128c-8.284 0-15-6.716-15-15s6.716-15 15-15h128c8.284 0 15 6.716 15 15s-6.716 15-15 15z"></path>
+                <path fill="#aeaeae" d="m320 482h-64v30h64c8.284 0 15-6.716 15-15s-6.716-15-15-15z"></path>
+                <path fill="#aeaeae" d="m400 439c-61.206 0-111-49.794-111-111s49.794-111 111-111 111 49.794 111 111-49.794 111-111 111z"></path>
+                <path fill="#aeaeae" d="m112 439c-61.206 0-111-49.794-111-111s49.794-111 111-111 111 49.794 111 111-49.794 111-111 111z"></path>
+                <path fill="#aeaeae" d="m256 222c-61.206 0-111-49.794-111-111s49.794-111 111-111 111 49.794 111 111-49.794 111-111 111z"></path>
+                <path fill="#aeaeae" d="m367 111c0-61.206-49.794-111-111-111v222c61.206 0 111-49.794 111-111z"></path>
+            </svg>
+            </g>
           <!-- <symbol id="base_node_menu" viewBox="0 0 24 24">
             <rect x="0" y="0" fill="transparent" width="22" height="22"></rect>
             <circle cx="4" cy="11" r="2" fill="#aeaeae"></circle>
@@ -66,6 +78,7 @@
           :transform="`translate(${item.Box.X}, ${item.Box.Y})`"
           @dotClick="dotClick"
           @nameClick="nameClick"
+          @findHoNgoai="findHoNgoai"
         />
       </svg>
 
@@ -219,6 +232,21 @@ export default {
     };
   },
   methods: {
+    findHoNgoai(data){
+      console.log(data,localStorage.Dongho_watching)
+      return;
+      GetDataAPI({
+        url: API.GetTree,
+        params: {
+          iDongho_id:  data.Hongoai_id == localStorage.Dongho_watching ? data.Dongho_id : data.Hongoai_id,
+        },
+        action: (re) => {
+          this.nodes = re;
+
+          // console.log(this.nodes);
+        },
+      });
+    },
     addTS() {
       this.tsArr.push(this.tieusu);
       this.tieusu = "";
@@ -396,7 +424,7 @@ export default {
     // this.$refs.svgContainer.querySelector('g').addEventListener("click", this.nodeClick);
     this.dongho_id = this.user.Dongho_id;
     this.GetNodeData();
-
+    console.log(this)
     // <
   },
   beforeMount() {

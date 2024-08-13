@@ -1,8 +1,8 @@
 <template>
 
       <div class="login-form">
-        <div class="login-banner">Gia phả</div>
-        <div class="title">Đăng nhập hệ thống</div>
+        <!-- <div class="login-banner">Gia ph/ả</div> -->
+        <!-- <div class="title">Đăng nhập hệ thống</div> -->
         <div class="login-form-input">
           <i class="el-icon-user-solid append"></i>
           <el-input
@@ -183,6 +183,8 @@ export default {
               localStorage.access_token = re.AccessToken;
               localStorage.user = {};
               localStorage.user = JSON.stringify(re);
+              // this.Dongho_watching = user.Dongho_id;
+              localStorage.Dongho_watching = re.Dongho_id;
 
               StoreManager.SetUser(JSON.parse(localStorage.user));
               console.log(StoreManager);
@@ -355,7 +357,7 @@ export default {
             width: 100%;
             border-radius: 5px;
             // box-shadow: 0 2px 12px 0 #f56c6c;
-            background: #1c75bc;
+            // background: #1c75bc;
             margin: 2.5px 0;
             text-align: center;
             span {

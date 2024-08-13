@@ -10,9 +10,9 @@
         text-color="#f1f1f1"
         :router="true"
       >
-        <el-menu-item @click="menuClick" index="/Account/Home/dang-nhap">
+        <el-menu-item @click="menuClick" index="/Account/Home/trang-chu">
           <!-- <a style="" href="#hero-section">Đăng nhập</a> -->
-          <nuxt-link to="/Account/Home/dang-nhap">Đăng nhập</nuxt-link>
+          <nuxt-link to="/Account/Home/trang-chu">Trang chủ</nuxt-link>
           <!-- Đăng nhập -->
         </el-menu-item>
         <el-menu-item @click="menuClick" index="/Account/Home/dang-ky">

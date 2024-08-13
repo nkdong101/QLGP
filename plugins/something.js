@@ -79,6 +79,7 @@ Vue.mixin({
       Para: Para,
       ConvertStr: ConvertStr,
       InputFileAccept: InputFileAccept,
+      Dongho_watching: '',
       // linkPurchase: linkPurchase,
     };
   },
@@ -89,6 +90,7 @@ Vue.mixin({
     user() {
       return StoreManager.GetUser();
     },
+    
     currentMenu() {
       let feature = this.$route.path
       let find = SearchTree(StoreManager.store.state.rawMenu, feature, "path");

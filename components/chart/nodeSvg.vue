@@ -105,6 +105,7 @@
     >
      
     </el-popover> -->
+    <use cursor="pointer" class="colored-use"  @click="abc" v-if="data.Hongoai_id > 0" x="200" y="10" xlink:href="#base_up"></use>
     <use
       @click="handClickdot"
       :data-ctrl-n-menu-id="data.id"
@@ -126,6 +127,9 @@ export default {
     },
   },
   methods: {
+    abc(){
+      this.$emit('findHoNgoai',this.data);
+    },
     handClickdot() {
       // console.log("handClickdotdotdotdot");
       // console.log(this.$refs['pop'+this.data.id])
@@ -153,5 +157,9 @@ export default {
   // vertical-align: sub;
   word-break: break-word;
   user-select:none;
+}
+.colored-use {
+  fill: red;
+  stroke: black;
 }
 </style>

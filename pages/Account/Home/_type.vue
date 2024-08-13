@@ -1,28 +1,29 @@
 <template lang="">
   <div>
     <div id="dang-nhap" class="hero-section">
-      <div :style="{ width: type == 'dang-nhap' ? '250px' : '' }" class="hero-section-logo">
-        <img :style="{ width: type == 'dang-nhap' ? '100%' : '250px' }" src="/images/vanhoaviet.png" />
+      <div class="hero-section-logo">
+        <img :style="{ width: '250px' }" src="/images/vanhoaviet.png" />
         <dowload_link></dowload_link>
       </div>
       <!-- <div>{{ type }}</div> -->
-      <Login_form v-if="type == 'dang-nhap'"></Login_form>
+      <!-- <Login_form v-if="type == 'dang-nhap'"></Login_form> -->
 
-      <div v-else class="hero-section-content">
-        <h3>Tiếp nối giá trị truyền thống bằng công nghệ</h3>
-        <p style="padding-top: 20px">
+      <div class="hero-section-content">
+        <h4 style="font-size: 24pt; margin-bottom: 20px">
+          Tiếp nối giá trị truyền thống bằng công nghệ
+        </h4>
+        <i style="padding-top: 30px">
           Văn hóa là nguồn cội, là bản sắc, là giá trị tinh thần được cha ông ta
           tạo dựng từ nhiều đời nay. Ngày nay công nghệ phát triển giúp cho cuộc
           sống diễn ra nhanh hơn, sôi động hơn đồng thời cũng là cơ hội để giúp
           chúng ta có những cách thức, phương tiện mới để lưu giữ và phát huy
           những giá trị tốt đẹp của văn hóa Việt. Chúng tôi rất vui và tự hào
           khi được đồng hành cùng các bạn thực hiện công việc ý nghĩa đó!
-        </p>
+        </i>
       </div>
-
     </div>
 
-    <div class="intro">
+    <div ref="intro" class="intro">
       <div class="intro-border">
         <div class="intro-logo">
           <img src="/images/caudoi_1.png" />
@@ -31,20 +32,20 @@
           <el-row :gutter="24">
             <el-col :span="8">
               <el-card shadow="always">
-                <h4>Số lượng dòng họ</h4>
-                <p>13</p>
+                <p style="font-size: 36pt">{{ countDongho  }}</p>
+                <h4>Dòng họ</h4>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card shadow="always">
-                <h4>Số lượng người</h4>
-                <p>132</p>
+                <p style="font-size: 36pt">{{ countGiapha  }}</p>
+                <h4>Người sử dụng</h4>
               </el-card>
             </el-col>
             <el-col :span="8">
               <el-card shadow="always">
-                <h4>Số lượng tỉnh có mặt</h4>
-                <p>12</p>
+                <p style="font-size: 36pt">{{ countTinh  }}</p>
+                <h4>Tỉnh có mặt</h4>
               </el-card>
             </el-col>
           </el-row>
@@ -52,21 +53,33 @@
       </div>
     </div>
     <div id="dang-ky" class="reigter">
-      <div class="regiter-wrapper">
-        <h4>Khởi tạo thông tin dòng họ</h4>
-        <div style="width: 100%; text-align: center; padding: 0 0 10px 0">
+      <div style="text-align: center" class="regiter-wrapper">
+        <h4>{{ isRegit ? "Khởi tạo thông tin dòng họ" : "Đăng nhập" }}</h4>
+        <div
+          v-if="isRegit"
+          style="width: 100%; text-align: center; padding: 0 0 10px 0"
+        >
           <i
             >Hãy để người thân, con cháu của bạn hiểu hơn về dòng họ của
             mình!</i
           >
         </div>
-        <Register />
+        <transition name="slide-fade" mode="out-in">
+          <component
+            @regiter="handleRegister"
+            :is="isRegit ? 'Register' : 'Login_form'"
+          />
+        </transition>
       </div>
     </div>
     <Comment id="gop-y" />
   </div>
 </template>
 <script>
+import API, { ServerAPI } from "~/assets/scripts/API";
+import DefaultForm from "~/assets/scripts/base/DefaultForm";
+import { ShowMessage, validateEmail } from "~/assets/scripts/Functions";
+import GetDataAPI from "~/assets/scripts/GetDataAPI";
 export default {
   layout: "blank",
   props: {
@@ -75,16 +88,26 @@ export default {
   data() {
     return {
       // isAdd: null,
+      home: {
+        Dongho: 0,
+        Giapha: 0,
+        Tinh: 0,
+      },
+      countDongho: 0,
+      countGiapha: 0,
+      countTinh: 0,
+      isRegit: true,
+      hasStarted: false,
     };
   },
 
   watch: {
-    $route: {
-      deep: true,
-      handler() {
-        console.log(this.type);
-      },
-    },
+    // $route: {
+    //   deep: true,
+    //   handler() {
+    //     // console.log(this.type);
+    //   },
+    // },
   },
   computed: {
     type() {
@@ -92,30 +115,93 @@ export default {
     },
   },
   methods: {
-    // onWheel(e) {
-    //   console.log(e, this);
-    // },
+    handleRegister(value) {
+      this.isRegit = value;
+      // console.log(value);
+    },
+    checkScroll() {
+      console.log(this.hasStarted)
+      let introPos = "";
+      if (this.$refs.intro)
+        introPos = this.$refs.intro.getBoundingClientRect().top;
+
+      // console.log(introPos)
+      const screenPosition = window.innerHeight;
+      if (!this.hasStarted && introPos < screenPosition) {
+        console.log("number increase");
+        this.hasStarted = true;
+        this.startCounting();
+      }
+    },
+    startCounting() {
+      this.animateValue("countDongho", 0, this.home.Dongho, 600);
+      this.animateValue("countGiapha", 0, this.home.Giapha, 600);
+      this.animateValue("countTinh", 0, this.home.Tinh, 600);
+    },
+    animateValue(ref, start, end, duration) {
+      if (start == end) return;
+      let startTime = null;
+
+      const animate = (currentTime) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        this[ref] = Math.floor(progress * (end - start) + start);
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    },
   },
   mounted() {
     // console.log(this);
+    this.hasStarted = false;
+    console.log('mounted',this.hasStarted)
+    GetDataAPI({
+      url: API.Reports_Home,
+      action: (re) => {
+        // console.log(re)
+        this.home = re;
+        window.addEventListener("scroll", this.checkScroll);
+      },
+    });
     this.$nextTick(() => {
       // console.log(document.getElementById(this.type));
       setTimeout(() => {
         document.getElementById(this.type).scrollIntoView();
       }, 0);
     });
+
+  
   },
 };
 </script>
 <style lang="scss" scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.slide-fade-enter /* .slide-fade-leave-active in <2.1.8 */ {
+  transform: translateX(25%);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-25%);
+  opacity: 0;
+}
+
 .reigter {
+ 
   display: flex;
   align-items: center;
   justify-content: center;
   // padding-top: 40px;
   .regiter-wrapper {
     padding: 20px 40px;
-
+    overflow: hidden;
     background-color: #fff;
     border-radius: 20px;
   }
@@ -167,11 +253,11 @@ export default {
     width: fit-content;
     display: flex;
     flex-direction: column;
-    align-items:    center;
+    align-items: center;
     img {
-    //   height: 180px;
-    //   // width: 300px;
-    //   width: 100%;
+      //   height: 180px;
+      //   // width: 300px;
+      //   width: 100%;
     }
   }
 
