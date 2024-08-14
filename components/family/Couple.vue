@@ -149,7 +149,7 @@ export default {
           this.isAdd = isAdd;
           var _app = this;
           this.form.title = title;
-          console.log(obj);
+          // console.log(obj);
           this.isEditWife = isEditWife;
           if (!isAdd) {
             APIHelper.Giapha.getInfor(obj.Id).then((re) => {
@@ -203,13 +203,15 @@ export default {
                   });
                   }
 
-
+                  console.log(this)
+                  // return;
                   GetDataAPI({
                     method: "post",
                     url: API.Add_Con,
                     params: {
                       Con_Info: this.form.obj.toJSON(),
-                      Me_Info: this.mother,
+                      Me_Info: this.obj.Curent.Gender == 1?  this.mother : new Giapha(this.obj.Curent).toJSON(),
+                      Father_id: this.obj.Curent.Gender == 1 ?this.obj.Curent.Id : this.mother.Id,
                       Conrieng: this.conrieng,
                     },
                     action: (re) => {

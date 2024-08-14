@@ -53,6 +53,10 @@ export default {
     this.store.commit("InitMenu", menu);
   },
 
+  GetMenu(){
+    return this.store.state.menu;
+  },
+
 
   //pr_form
   Getcurrency_code() {

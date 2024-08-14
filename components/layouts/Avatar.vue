@@ -10,8 +10,9 @@
                  size="small">
         <div style="display: flex; align-items: center; color: white">
           <div class="circle-avatar">
-            <img :src="user.Picture.split('|')[0] + '?t=' + new Date().getTime()"
-                 :alt="user.Picture.split('|')[0] " />
+            <!-- <img :src="user.Picture.split('|')[0] + '?t=' + new Date().getTime()"
+                 :alt="user.Picture.split('|')[0] " /> -->
+                 <i style="color: white" class="el-icon-user-solid"></i>
           </div>
         </div>
       </el-button>
@@ -20,8 +21,10 @@
           <div>
             <div class="circle-avatar"
                  style="height: 80px; width: 80px;">
-              <img :src="user.Picture.split('|')[0] ||'' + '?t=' + new Date().getTime()"
-                   :alt="user.Picture.split('|')[0] ||''"  />
+              <img style="height: 100%;" :src="user.Picture ?  '/Images/avatar/' + user.Picture.split('|')[0]
+          : '/Images/avatar/user.png' + '?t=' + new Date().getTime()"
+                   :alt="user.Picture ?  '/Images/avatar/' + user.Picture.split('|')[0]
+          : '/Images/avatar/user.png'"  />
             </div>
           </div>
           <div class="profile-info">
@@ -35,13 +38,13 @@
                          size="small"
                          style="padding: 0"
                          @click="profile()">
-                My profile
+                Thông tin
               </el-button>
               <el-button type="text"
                          size="small"
                          style="padding: 0"
                          @click="logout()">
-                Sign out
+                Đăng xuất
               </el-button>
             </div>
           </div>
@@ -115,7 +118,7 @@ export default {
     },
     logout() {
       localStorage.clear();
-
+      StoreManager.SetUser(null)
           this.$router.push("/Account/Home");
 
     },
@@ -131,18 +134,19 @@ export default {
   },
   mounted(){
 
-    console.log('Avatar',this)
+    // console.log('Avatar',this)
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .circle-avatar {
-  height: 35px;
-  width: 35px;
-  border-radius: 100%;
+  // height: 35px;
+  // width: 35px;
+  // border-radius: 100%;
   overflow: hidden;
-  border: 1px solid black;
+  // border: 1px solid #fff;
+  color: #fff
 
   img {
     height: 100%;

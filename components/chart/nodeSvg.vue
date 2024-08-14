@@ -1,5 +1,6 @@
 <template lang="">
-  <g
+  <g 
+       ref="node"
     style="pointer-events: bounding-box"
     :transform="transform"
     @click="handleClick"

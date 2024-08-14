@@ -141,7 +141,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this);
+    // console.log(this);
     let find_router = SearchTree(this.menu, this.$route.path, "path");
     if (find_router) {
       this.menu_active = find_router.index;
