@@ -28,11 +28,17 @@
             <el-avatar size="small" v-else :src="'/Images/avatar/' + item.Avatar.split('|')[0]" fit="fill"></el-avatar>
           </el-col>
           <el-col :span="6">
-            {{ item.Name }}
-            {{ item.Other_Name ? `(${item.Other_Name})` : "" }}
+            <span>
+              {{ item.Name }}
+              {{ item.Other_Name ? `(${item.Other_Name})` : "" }}
+            </span>
+        
           </el-col>
           <el-col :span="2">
-            {{ Para.Gender.getName(item.Gender) }}
+            <span>
+              {{ Para.Gender.getName(item.Gender) }}
+
+            </span>
           </el-col>
           <el-col :span="6">
             <span v-if="item.Birthday || item.Year_Of_Birth">

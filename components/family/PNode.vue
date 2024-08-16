@@ -18,7 +18,7 @@
       </div>
       <div class="bottom">
         <div class="img">
-          <el-avatar v-if="!person.Avatar" icon="el-icon-user-solid"></el-avatar>
+          <el-avatar fit="fill" v-if="!person.Avatar" icon="el-icon-user-solid"></el-avatar>
           <el-avatar v-else :src="'/Images/avatar/' + person.Avatar.split('|')[0]" fit="fill"></el-avatar>
 
 
@@ -27,8 +27,11 @@
           <el-row type="flex" align="middle" :gutter="10">
             <el-col :span="18"
               ><i class="fa fa-user-circle" aria-hidden="true"></i>
-              {{ person.Name }}
-              {{ person.Other_Name ? `(${person.Other_Name})` : "" }}
+              <span style="    word-break: break-word;">
+                {{ person.Name }}
+                {{ person.Other_Name ? `(${person.Other_Name})` : "" }}
+              </span>
+             
             </el-col>
             <el-col :span="6"
               >
@@ -267,4 +270,12 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  span,p{
+  font-size:11px;
+  }
+  
+}
+
 </style>

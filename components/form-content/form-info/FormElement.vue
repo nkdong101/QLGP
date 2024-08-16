@@ -14,6 +14,9 @@
     <el-col
       :id="'div_' + model.id"
       :span="model.col || 24"
+  
+      :xs="model.colsm || 24"
+    
       v-if="!model.child && isLoaded && isVisible"
       :class="'form-element-type-' + model.type + ' ' + model.class"
       style="position: relative"

@@ -1,6 +1,6 @@
 <template>
   <div
-  class="giapha"
+    class="giapha"
     style="height: 100%; overflow: hidden"
     @wheel="onWheel"
     :style="{
@@ -17,6 +17,7 @@
         display: block;
         position: relative;
       "
+       
     >
       <!-- -->
       <svg
@@ -24,11 +25,22 @@
         @mousemove="pan"
         @mouseup="endPan"
         @mouseleave="endPan"
+        @touchstart="startPan"
+    @touchmove="pan"
+    @touchend="endPan"
+    @touchcancel="endPan"
+      
         ref="svgElement"
         :viewBox="viewBox"
         style="height: 100%; width: 100%; overflow-x: auto; overflow-y: auto"
       >
         <defs>
+          <filter id="dropShadow" x="0" y="0" width="200%" height="200%">
+            <feOffset result="offOut" in="SourceGraphic" dx="5" dy="5" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="5" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+          </filter>
+
           <g id="base_node_menu" style="cursor: pointer">
             <rect x="0" y="0" fill="transparent" width="22" height="22"></rect>
             <circle cx="4" cy="11" r="2" fill="#aeaeae"></circle>
@@ -111,6 +123,8 @@
           @dotClick="dotClick"
           @nameClick="nameClick"
           @findHoNgoai="findHoNgoai"
+          ref="node"
+          @hook:mounted="movetoNode0(item, index)"
         />
       </svg>
 
@@ -265,6 +279,27 @@ export default {
     };
   },
   methods: {
+    movetoNode0(item, index) {
+      if (index === 0) {
+        const node0 = this.$refs.node[0].$el.getBoundingClientRect();
+        const svgElement = this.$refs.svgElement;
+        const svgRect = svgElement.getBoundingClientRect();
+
+      
+        const svgCenterX = svgRect.width;
+        
+
+        const [_, y, viewBoxWidth, viewBoxHeight] = this.viewBox
+          .split(" ")
+          .map(Number);
+
+       
+        this.viewBox = `${svgCenterX} ${y} ${viewBoxWidth} ${viewBoxHeight}`;
+
+        
+      }
+    },
+
     findHoNgoai(data) {
       console.log(data, localStorage.Dongho_watching);
       //return;
@@ -308,39 +343,47 @@ export default {
     },
 
     startPan(event) {
-      if (event.button !== 0) return; // Only respond to left mouse button
-      this.isPanning = true;
-      this.startPoint = { x: event.clientX, y: event.clientY };
-      const viewBoxValues = this.viewBox.split(" ").map(Number);
-      this.startViewBox = {
-        x: viewBoxValues[0],
-        y: viewBoxValues[1],
-        width: viewBoxValues[2],
-        height: viewBoxValues[3],
-      };
+       
+        if (event.type === 'mousedown' && event.button !== 0) return; 
+
+        this.isPanning = true;
+
+   
+        const clientX = event.type === 'mousedown' ? event.clientX : event.touches[0].clientX;
+        const clientY = event.type === 'mousedown' ? event.clientY : event.touches[0].clientY;
+
+        this.startPoint = { x: clientX, y: clientY };
+
+        const viewBoxValues = this.viewBox.split(" ").map(Number);
+        this.startViewBox = {
+            x: viewBoxValues[0],
+            y: viewBoxValues[1],
+            width: viewBoxValues[2],
+            height: viewBoxValues[3],
+        };
     },
     pan(event) {
-      if (!this.isPanning) return;
+        if (!this.isPanning) return;
 
-      const dx =
-        (this.startPoint.x - event.clientX) *
-        (this.startViewBox.width / this.$refs.svgElement.clientWidth);
-      const dy =
-        (this.startPoint.y - event.clientY) *
-        (this.startViewBox.height / this.$refs.svgElement.clientHeight);
+     
+        const clientX = event.type === 'mousemove' ? event.clientX : event.touches[0].clientX;
+        const clientY = event.type === 'mousemove' ? event.clientY : event.touches[0].clientY;
 
-      if (this.startViewBox.x + dx < 0) return;
-      this.viewBox = `${this.startViewBox.x + dx} ${this.startViewBox.y + dy} ${
-        this.startViewBox.width
-      } ${this.startViewBox.height}`;
+        const dx = (this.startPoint.x - clientX) * ((this.startViewBox.width + 500) / this.$refs.svgElement.clientWidth);
+        const dy = (this.startPoint.y - clientY) * ((this.startViewBox.height + 500) / this.$refs.svgElement.clientHeight);
+
+        let newX = this.startViewBox.x + dx;
+        if (this.startViewBox.x + dx < 0) return;
+
+        this.viewBox = `${newX} ${this.startViewBox.y + dy} ${this.startViewBox.width} ${this.startViewBox.height}`;
     },
     endPan() {
-      this.isPanning = false;
+        this.isPanning = false;
     },
     nodePosition(item, index) {
-      console.log(item);
+      // console.log(item);
       if (item.fid && item.mid) {
-        console.log(item);
+        // console.log(item);
         // console.log(`translate(${index * (this.nodes.Config.Width + 30)},  ${item.Level * (this.nodes.Config.Height + 50)})`)
         return `translate(${index * (this.nodes.Config.Width + 30)},  ${
           item.Level * (this.nodes.Config.Height + 50)
@@ -451,11 +494,11 @@ export default {
     // },
 
     dotClick(item) {
-      console.log("click", item);
-      this.form.ShowForm(`Thông tim của ${item.name}`, item, false);
+      // console.log("click", item);
+      this.form.ShowForm(`Thông tin của ${item.name}`, item, false);
     },
     nodeClick() {
-      console.log("click");
+      // console.log("click");
     },
     moveTofirst() {
       const firstElement = this.nodes.Data[0];
@@ -496,33 +539,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.giapha{
- 
+.giapha {
   background-color: #fff;
-  border-radius:10px;
+  border-radius: 10px;
 }
-
 
 .fm {
   height: 100%;
   // overflow: hidden;
+
   .form-info {
     height: 100%;
-    ::v-deep .form-info-c {
+    /deep/ .form-info-c {
       height: 100%;
       display: flex;
-      overflow: hidden;
+      // overflow-y: auto;
+      overflow-x: hidden;
       flex-direction: column;
       > div:nth-child(3) {
         // height:100%;
         // background:red;
         // div:nth-child(2){
         // height: 100%;
-        overflow: hidden;
+        // overflow-y: auto;
         // }
         #div_siblings_form {
-          height: 100%;
-          overflow: auto;
+          // height: 100%;
+          // overflow-y: auto;
         }
       }
     }
@@ -564,5 +607,26 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  /deep/#div_Couple_form{
+    width: 100%;
+    margin-bottom: 5px;
+    overflow-x: scroll;
+    #Couple_form{
+      min-width: 560px;
+    }
+  }
+
+  /deep/#div_siblings_form{
+    width: 100%;
+    margin-bottom: 5px;
+    overflow-x: scroll;
+    #siblings_form{
+      min-width: 560px;
+    }
+  }
+
 }
 </style>

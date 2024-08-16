@@ -1,5 +1,5 @@
 <template lang="">
-  <div style="width: 100%; height: 100%">
+  <div style="height: 100%">
     <!-- <div v-for="item in obj.Couple">
       <PNode
         :nameTitle="item.Gender == 1 ? 'Chồng' : 'Vợ'"
@@ -15,25 +15,29 @@
         </div>
       </div>
     </div> -->
-    <el-tree v-if="obj.Couple && obj.Couple.length> 0"  :data="obj.Couple"  :default-expanded-keys="[1, 2]" :props="defaultProps" node-key="Id">
+    <el-tree default-expanded-all
+     v-if="obj.Couple && obj.Couple.length> 0"  :data="obj.Couple"  :default-expanded-keys="[1, 2]" :props="defaultProps" node-key="Id">
       <div class="custom-tree-node" slot-scope="{ node, data }">
         <!-- <p v-if="node.level == 1">{{data.Gender == 1? "Chồng": "Vợ"}}</p> -->
         <el-row  class="">
-          <el-col :span="2">
+          <el-col :span="3">
             <el-avatar size="small" v-if="!data.Avatar" icon="el-icon-user-solid"></el-avatar>
           <el-avatar v-else size="small" :src="'/Images/avatar/' + data.Avatar.split('|')[0]" fit="cover"></el-avatar>
           </el-col>
-          <el-col :span="6">
-
-            {{ data.Name }}
-            {{ data.Other_Name ? `(${data.Other_Name})` : "" }}
+          <el-col  :span="6">
+<span>   {{ data.Name }}
+  {{ data.Other_Name ? `(${data.Other_Name})` : "" }}</span>
+         
           </el-col>
-          <el-col :style="{
+          <el-col :xs="4" :style="{
             paddingLeft: node.level == 1 ? '8px': '0'
           }" :span="2">
+          <span>
             {{ Para.Gender.getName(data.Gender) }}
+
+          </span>
           </el-col>
-          <el-col :style="{
+          <el-col :xs="6" :style="{
             paddingLeft: node.level == 1 ? '8px': '0'
           }" :span="6">
             <span v-if="(data.Birthday || data.Year_Of_Birth) && !data.Date_of_death">
@@ -344,4 +348,6 @@ export default {
   padding: unset;
   border: unset;
 }
+
+
 </style>

@@ -1,9 +1,10 @@
 <template lang="">
-  <g 
+  <g  :filter="data.id === user.AccountSerial ? 'url(#dropShadow)'  : ''"
        ref="node"
     style="pointer-events: bounding-box"
     :transform="transform"
     @click="handleClick"
+      :style="{userSelect: 'none' }"
   >
     <rect
       :x="0"
@@ -37,13 +38,12 @@
     ></line>
     <text
       data-text-overflow="multiline"
-
-      :style="{fontSize: '12px',userSelect: 'none',fontWieght:'bold' }"
+      :style="{userSelect: 'none' }"
       fill="white"
       x="110"
       y="15"
-   font-size="30"
-   font-weight="700"
+   font-size="16"
+   font-weight="600"
       >
         Đời {{ ConvertStr.convertToRoman(data.Level+1) }}
       </text
@@ -76,7 +76,7 @@
       y="83"
       text-anchor="start"
       ><tspan x="100" y="83" text-anchor="start"
-        >{{ data.Namsinh == 0 ? 'Không rõ': data.Namsinh }}
+        >{{ data.Namsinh == 0 || !data.Namsinh ? 'Không rõ': data.Namsinh }}
         {{ data.Nammat ? " - "  + data.Nammat : "" }}
       </tspan></text
     >
@@ -107,13 +107,28 @@
      
     </el-popover> -->
     <use cursor="pointer" class="colored-use"  @click="abc" v-if="data.Hongoai_id > 0" x="200" y="10" xlink:href="#base_up"></use>
-    <use
+
+    <foreignObject
+     @click="handClickdot"
+      cursor="pointer"
+      :style="{
+        fontSize: '14px',
+      }"
+     x="210"
+      y="95"
+      width="30"
+      height="30"
+      ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </foreignObject>
+    <!-- <use
       @click="handClickdot"
       :data-ctrl-n-menu-id="data.id"
       x="210"
       y="95"
       xlink:href="#base_node_menu"
-    ></use>
+    > -->
+  
+  </use>
   </g>
 </template>
 <script>

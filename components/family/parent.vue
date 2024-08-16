@@ -1,5 +1,5 @@
 <template lang="">
-  <div style="display: flex; justify-content: center; align-items: center">
+  <div style="">
     <PNode
       @showForm="showForm"
       :nameTitle="'Cha'"
@@ -201,8 +201,30 @@ export default {
 </script>
 <style lang="scss" scoped>
 .formCM {
+  justify-content: space-between;
   .fm_form:first-child {
     padding-right: 10px;
   }
 }
+
+#father_form{
+  display: flex; justify-content: center; align-items: center;
+  
+}
+
+@media only screen and (max-width: 767px) {
+  #father_form{
+  display: flex; justify-content: center; align-items: center;
+  flex-direction: column;
+  
+}
+
+}
+@media only screen and (max-width: 490px) {
+  .formCM{
+  flex-direction: column;
+}
+}
+
+
 </style>

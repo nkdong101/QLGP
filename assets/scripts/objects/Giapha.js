@@ -272,7 +272,7 @@ export default class Giapha {
 
         Couple: new FormElement({
             id: "Couple_form",
-
+            col: 12,
             type: "Couple",
             attr: {
                 obj: this,

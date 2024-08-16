@@ -11,6 +11,7 @@
           :style="{
             display: 'block',
             width: labelWidth - 20 + 'px ',
+     
           }"
           v-html="label"
         ></span>
@@ -41,6 +42,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@media only screen and (max-width: 500px) {
+  span{
+    font-size:10px;
+  }
+
+}
 .input-c {
   .el-input-group__append,
   .el-input-group__prepend {

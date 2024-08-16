@@ -341,3 +341,13 @@ html {
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .form-element-child-horizontal{
+    flex-direction: column;
+  }
+  span,p{
+    font-size: 11px;
+  }
+
+}
