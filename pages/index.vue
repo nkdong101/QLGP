@@ -609,13 +609,15 @@ export default {
   left: 0;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   /deep/#div_Couple_form{
     width: 100%;
     margin-bottom: 5px;
     overflow-x: scroll;
+    border-right: 1px solid gray;
     #Couple_form{
       min-width: 560px;
+    
     }
   }
 

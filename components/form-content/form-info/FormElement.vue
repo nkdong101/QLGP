@@ -139,7 +139,7 @@
       :id="'div_' + model.id"
       :span="model.col || 24"
       v-else-if="isInline() && isVisible"
-      :class="'form-element-child-horizontal '"
+      :class="'form-element-child-horizontal ' + model.parent_class"
       style="display: flex; padding: 0px"
     >
       <template v-if="model.label">

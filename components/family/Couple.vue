@@ -1,5 +1,5 @@
 <template lang="">
-  <div style="height: 100%">
+  <div style="height: fit-content">
     <!-- <div v-for="item in obj.Couple">
       <PNode
         :nameTitle="item.Gender == 1 ? 'Chồng' : 'Vợ'"
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div> -->
-    <el-tree default-expanded-all
+    <el-tree default-expand-all
      v-if="obj.Couple && obj.Couple.length> 0"  :data="obj.Couple"  :default-expanded-keys="[1, 2]" :props="defaultProps" node-key="Id">
       <div class="custom-tree-node" slot-scope="{ node, data }">
         <!-- <p v-if="node.level == 1">{{data.Gender == 1? "Chồng": "Vợ"}}</p> -->
@@ -29,15 +29,15 @@
   {{ data.Other_Name ? `(${data.Other_Name})` : "" }}</span>
          
           </el-col>
-          <el-col :xs="4" :style="{
+          <el-col  style="text-align:center" :sm="4"  :style="{
             paddingLeft: node.level == 1 ? '8px': '0'
-          }" :span="2">
+          }" :span="4">
           <span>
             {{ Para.Gender.getName(data.Gender) }}
 
           </span>
           </el-col>
-          <el-col :xs="6" :style="{
+          <el-col :sm="6" :style="{
             paddingLeft: node.level == 1 ? '8px': '0'
           }" :span="6">
             <span v-if="(data.Birthday || data.Year_Of_Birth) && !data.Date_of_death">
@@ -55,8 +55,8 @@
             >
           </el-col>
 
-          <el-col :span="5"> </el-col>
-          <el-col :span="2"> </el-col>
+          <!-- <el-col :sm="4" :span="5"> </el-col>
+          <el-col :sm="4" :span="2"> </el-col> -->
         </el-row>
         <el-button
           @click="EditVo(data)"  type="primary"

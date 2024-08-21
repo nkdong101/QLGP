@@ -1,21 +1,30 @@
 <template lang="">
-  <div :class="['header', { hasUser: user && $route.path !=='/Account/Home/trang-chu' }]">
+  <div
+    :class="[
+      'header',
+      { hasUser: user && $route.path !== '/Account/Home/trang-chu' },
+    ]"
+  >
     <div class="header-logo"></div>
     <div class="header-menu">
+      <i class="el-icon-s-fold slide-in-top" @click="toggleMenu"></i>
       <el-menu
         :default-active="$route.path"
-        class="el-menu"
-        mode="horizontal"
-        :active-text-color="!user ? '#fff' : '#fff'"
-        :text-color="user ? '#f1f1f1' : '#f1f1f1'"
+        :class="['el-menu']"
+        :mode="!this.menuVisible ? 'horizontal' : 'vertical'"
+        active-text-color=" #fff"
+        text-color="#f1f1f1"
         :router="true"
+        ref="elMenu"
       >
-        <el-menu-item  @click="menuClick" index="/Account/Home/trang-chu">
+        <el-menu-item @click="menuClick" index="/Account/Home/trang-chu">
           <!-- <a style="" href="#hero-section">Đăng nhập</a> -->
           <nuxt-link to="/Account/Home/trang-chu">Trang chủ</nuxt-link>
           <!-- Đăng nhập -->
         </el-menu-item>
-        <el-menu-item v-if="user" index="/"> <nuxt-link to="/"> Gia phả </nuxt-link></el-menu-item>
+        <el-menu-item v-if="user" index="/">
+          <nuxt-link to="/"> Gia phả </nuxt-link></el-menu-item
+        >
         <el-menu-item
           v-if="!user"
           @click="menuClick"
@@ -25,11 +34,15 @@
           <nuxt-link to="/Account/Home/dang-ky">Đăng ký sử dụng</nuxt-link>
           <!-- Đăng ký sử dụng -->
         </el-menu-item>
-        <el-menu-item v-if="!user" @click="menuClick" index="/Account/Home/gop-y">
+        <el-menu-item
+          v-if="!user"
+          @click="menuClick"
+          index="/Account/Home/gop-y"
+        >
           <!-- <a href="#Comment">Góp ý</a> -->
           <nuxt-link to="/Account/Home/gop-y">Góp ý</nuxt-link>
         </el-menu-item>
-        <el-submenu  v-if="user" popper-class="submenu" index="#">
+        <el-submenu v-if="user" popper-class="submenu" index="#">
           <template slot="title">Mở rộng</template>
 
           <el-menu-item
@@ -56,19 +69,29 @@
 import StoreManager from "~/assets/scripts/StoreManager";
 
 export default {
+  data() {
+    return {
+      menuVisible: false,
+    };
+  },
   computed: {
     menu() {
       return StoreManager.GetMenu();
     },
   },
   methods: {
-    menuClick(el) {
-      // // console.log(el)
-      // el.$el.querySelector("a").click();
-      // if (el.index === "1") this.$emit("login", true);
-      // else {
-      //   this.$emit("login", false);
-      // }
+    // isMoble() {
+    //  return window.innerWidth <= 610;
+    // },
+    menuClick(el) {},
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible;
+      if (this.menuVisible) {
+        console.log(this.$refs.elMenu);
+        this.$refs.elMenu.$el.style.display = "block";
+      } else {
+        this.$refs.elMenu.$el.style.display = "none";
+      }
     },
   },
   mounted() {
@@ -78,23 +101,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
-
 // .el-menu--popup {
-//  
+//
 // }
 .hasUser {
   position: static !important;
-  // background-image: linear-gradient(
-  //     180deg,
-  //     rgba(48, 53, 58, 0.6) 0%,
-  //     rgba(50, 48, 48, 0.2) 70%
-  //   ),
-  //   url("/images/banner1.jpg") !important;
-  //   background-size: fill,cover !important;;
-    // background-position: center !important;;
-
-  // /deep/
 }
 .header {
   display: flex;
@@ -128,7 +139,7 @@ export default {
           border: 0;
           line-height: 50px;
           height: 50px;
-          i{
+          i {
             color: white;
             font-size: 14px;
           }
@@ -210,7 +221,54 @@ export default {
   // border: unset;
 }
 
-// . 
+// .
 
+.el-icon-s-fold {
+  // visibility: hidden;
+  // opacity: 0;
+  display: none;
+  transform: rotate(-90deg);
+  font-size: 30px;
+  color: white;
+}
 
+@media only screen and (max-width: 610px) {
+  .header-menu {
+    .el-icon-s-fold {
+      display: block;
+    }
+    .el-menu {
+      display: none;
+    }
+  }
+}
+
+.slide-in-top {
+  -webkit-animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 </style>

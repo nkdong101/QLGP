@@ -326,6 +326,7 @@ export default class Giapha {
                 this._formElements.Me,
 
                 new FormElement({
+                    parent_class:"align-flex-start",
                     direction: FormDirectionType.horizontal,
                     child: [
                         this._formElements.Couple,
